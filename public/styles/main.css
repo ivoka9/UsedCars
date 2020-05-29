@@ -1,0 +1,21 @@
+body{
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    
+  }
+.logo {
+    float: left;
+
+}
+img{
+    margin-left: 2px;;
+    width: 130px;
+    height: 80px;
+    position: relative;
+}
+.right-menu {
+    float: right;
+    margin-right: 20px;
+    margin-top: 20px;
+}
