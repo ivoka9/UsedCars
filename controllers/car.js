@@ -27,7 +27,17 @@ router.post('/', function(req,res){
         } else {
             res.redirect('/cars');
         }
-    })
-})
+    });
+});
 
+router.get('/:id', function(req,res){
+    db.Car.findById(req.params.id, function(error, foundCar){
+        if(error){
+            console.log(error);
+        } else {
+            const context = {car: foundCar};
+            res.render('car/show', context);
+        }
+    });
+});
 module.exports = router;

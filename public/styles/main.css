@@ -26,13 +26,26 @@ header img{
     color: black;
 }
 .advertise {
-    height: 250px;
+    height: 230px;
     background-color: #FAB7B7;
     
 }
 .container {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; 
+    height: 270px;
+    background-color: #F5A8A8;
    
+}
+.carlist{
+    
+    margin-bottom: 130px;
+}
+h2{
+    text-align: center;
+}
+.footer{
+    background-color: #E19999;
+    height: 60px;
 }
