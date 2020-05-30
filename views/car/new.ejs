@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/main.css">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/cars" method="POST">
+    <p>
+       Name: <input type="text" name="name" placeholder="Name" required />
+    </p>
+    <p>
+      Price: <input type="number" name="price" placeholder="Price" required />
+    </p>
+    <p>
+       Year: <input type="number" min="1900" max="2020" name="year" placeholder="year" required />
+    </p>
+    <p>
+       Mileage: <input type="number" name="mileage" placeholder="mileage" required />
+    </p>
+    <p>
+       Description: <textarea name="description" ></textarea>
+    </p>
+    <p>
+        <input type="submit" value="Create">
+    </p>
+    
+    
+    
+    
+    </form>
+</body>
+</html>
