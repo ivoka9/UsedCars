@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles/newUser.css">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/create" method="post" id="form">
+        <label >Register</label>
+        <input type="text" name="username" placeholder="username" id="username" >
+        <% if (userFlag) { %>
+            <p>Username has been taken</p>
+            <% } %>     
+        <input type="password" name="password"  placeholder="password" id="password" >
+        <% if (passwordFlag) { %>
+            <p>The password must be  at least</br> 3 charecters long</p>
+            <% } %>
+        <input type="number" name="phone" placeholder="Phone"  id="phone" >
+        <% if (phoneFlag) { %>
+            <p>The phone number that you have </br> entered is taken or incorrect </p>
+            <% } %>
+        
+        <button  type="submit" > Create your account</button>
+
+    </form>
+
+
+
+</body>
+
+</html>
