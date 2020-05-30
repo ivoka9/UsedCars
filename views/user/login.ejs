@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles/newUser.css">
     <title>Document</title>
 </head>
 <body>
-    <form action="/login" method="POST">
+    <form action="/login" method="POST" id="form">
         <input type="text" placeholder="Username" name='username'>
         <input type="password" placeholder="Password" name='password'>
         <% if (loginFlag) { %>
          <p>Username or Password did not match</p>
         <% } %>
-        <input type="submit" value="Log In">
+        <button type="submit">Log In</button>
     
     </form>
 </body>
