@@ -9,9 +9,10 @@ mongoose.connect(connectionString, {
     useFindAndModify: false
 }).then(function(){
     console.log("MongoDb Connection Successful..");
-}).catch(function() 
-{
-     connectionString = "mongodb://127.0.0.1:27017/usedcars";
+}).catch(function(err) 
+{   
+    console.log('working')
+     connectionString = "mongodb://127.0.0.1:27017/usedcars" ;
      mongoose.connect(connectionString, 
         {
         useNewUrlParser: true,

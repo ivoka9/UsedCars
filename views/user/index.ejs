@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body> 
+  <% console.log(user.currentUser)%>
+  <% if (user.currentUser) { %>
+   <form action="/logout" method="POST">
+     <input type="submit" >
+   </form>
+   <h1>Welcome <%=user.currentUser.username%></h1>
+   <a href="/profile/<%=user.currentUser.id%>">Profile</a>
+  <% }  else { %>
+  <a href="/create"> Create Acc </a> 
+    <button>Veiw Cars</button>
+    <a href="/login">Login</a>
+  <% }%>
+</body>
+</html>
