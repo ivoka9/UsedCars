@@ -6,6 +6,13 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Profile page</h1>
+    <h1>Profile page of <%=userProfile.Username%></h1>
+    listing:
+    <ul>
+        <% for( let index = 0; index < userProfile.Product.length; index++ ) { %>
+            <li> <%=userProfile.Product[index] %>  </li>
+        <% } %>
+        
+    </ul>
 </body>
 </html>
