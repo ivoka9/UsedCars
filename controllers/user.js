@@ -113,7 +113,15 @@ router.post('/logout' , async (req,res)=>{
 })
 
 router.get('/profile/:id' , async (req,res)=>{
-
+try{
+const userProfile = db.User.findById(req.params.id)
+  res.render("user/profile",userProfile)      
+}
+catch(err){
+    console.log(err)
+    res.redirect('/')
+}
 })
+
 
 module.exports= router
