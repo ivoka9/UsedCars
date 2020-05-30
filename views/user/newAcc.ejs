@@ -8,10 +8,18 @@
 <body>
     <form action="/create" method="post">
         <input type="text" name="username" placeholder="username" id="username" >
+        <%= userFlag %>
+        <% if (userFlag) { %>
+            <p>Username has been taken</p>
+            <% } %>
+        
         <input type="password" name="password"  placeholder="password" id="password" >
         <input type="number" name="phone" placeholder="Phone"  id="phone" >
-
-        <button id="submit" type="button" > Submit</button>
+        <% if (phoneFlag) { %>
+            <p>phone has been taken</p>
+            <% } %>
+        
+        <button  type="submit" > Submit</button>
 
     </form>
 

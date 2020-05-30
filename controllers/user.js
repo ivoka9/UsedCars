@@ -3,6 +3,8 @@ const router = express.Router()
 const db = require('../models')
 const bcrypt= require('bcryptjs');
 
+let userFlag=false , phoneFlag=false
+
 router.get('/' ,(req,res)=>{
    
     res.render('user/index' ,  { user: req.session } )
@@ -10,14 +12,33 @@ router.get('/' ,(req,res)=>{
 
 
 router.get('/create',  async (req,res)=>{
-    userdata = await db.User.find({})
-    res.render('user/newAcc' , {userdata : userdata})
+    
+    res.render('user/newAcc' , {
+        userFlag : userFlag,
+        phoneFlag : phoneFlag
+    })
 })
 
 
 router.post('/create', async (req,res)=>{
-    let userFlag=false , phoneFlag=false
+
+
     try{
+       const user = await db.User.findOne({Username: req.body.username})
+       phoneFlag= false;
+       userFlag= false;
+       
+       if(user){
+           userFlag = true 
+           return res.redirect('/create')
+        }
+       const phone = await db.User.findOne({Phone: req.body.phone})
+       console.log(phone)
+       if(phone){
+           phoneFlag= true;
+           return res.redirect('/create')
+       }
+       
         const salt = await bcrypt.genSalt(10)
         const hash =await bcrypt.hash(req.body.password ,salt)
         req.body.password=hash
@@ -32,12 +53,13 @@ router.post('/create', async (req,res)=>{
     }
     catch(err){
         if(err){console.log(err)}
+        res.redirect('/')
     }
 })
 
 
 router.get('/login', (req,res)=>{
-    res.render('user/login')
+    res.render('user/login',{loginFlag : loginFlag})
 })
 
 
