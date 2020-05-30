@@ -16,10 +16,12 @@ router.get('/',function(req,res){
     
 
 });
+// new route
 router.get('/new',function(req,res){
     res.render('car/new');
 })
 
+// create route
 router.post('/', function(req,res){
     db.Car.create(req.body, function(error, createdCar){
         if(error){
@@ -30,6 +32,7 @@ router.post('/', function(req,res){
     });
 });
 
+// show route
 router.get('/:id', function(req,res){
     db.Car.findById(req.params.id, function(error, foundCar){
         if(error){

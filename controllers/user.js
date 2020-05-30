@@ -48,17 +48,7 @@ router.post('/create', async (req,res)=>{
         const salt = await bcrypt.genSalt(10)
         const hash =await bcrypt.hash(req.body.password ,salt)
         req.body.password=hash
-/// this is  fake DB feel free to delete it ! 
-        let car = Math.random()*100
-        if( car <10){car="toyota"}
-        else if( car <20){car="Ford"}
-        else if( car <30){car="Hunday"}
-        else if( car <40){car="lex"}
-        else if( car <50){car="ok"}
-        else if( car <60){car="Z"}
-        else if( car <70){car="X"}
-        else if( car <80){car="M"}
-        else if( car <100){car="F"}
+
 
 
        const creatingUser = {
@@ -66,7 +56,7 @@ router.post('/create', async (req,res)=>{
             Username : req.body.username,
             Password : req.body.password,
             Phone : req.body.phone,
-            Product : car
+            
         }
         const newUser = await db.User.create(creatingUser)
         res.redirect('/')
