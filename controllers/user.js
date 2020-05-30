@@ -8,15 +8,15 @@ router.get('/',(req,res)=>{
 })
 
 
-router.get('/create', (req,res)=>{
-    res.render('user/newAcc')
+router.get('/create',  async (req,res)=>{
+    userdata = await db.User.find({})
+    res.render('user/newAcc' , {userdata : userdata})
 })
 
 
 router.post('/create', async (req,res)=>{
     try{
-        const user =await db.User.find({Username : req.body.username},)
-        if(!user){return res.send("you have an acc")}
+        
         const creatingUser = {
             Username : req.body.username,
             Password : req.body.password,
@@ -30,6 +30,10 @@ router.post('/create', async (req,res)=>{
     }
 })
 
+
+router.get('/login', (req,res)=>{
+    res.render('user/login')
+})
 
 
 module.exports= router

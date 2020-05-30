@@ -7,13 +7,49 @@
 </head>
 <body>
     <form action="/create" method="post">
-        <input type="text" name="username" placeholder="username" >
-        <input type="password" name="password"  placeholder="password" >
-        <input type="number" name="phone" placeholder="Phone"  >
+        <input type="text" name="username" placeholder="username" id="username" >
+        <input type="password" name="password"  placeholder="password" id="password" >
+        <input type="number" name="phone" placeholder="Phone"  id="phone" >
 
-        <input type="submit"  >
-
+        <button id="submit" type="button" > Submit</button>
 
     </form>
+    <% for( let index = 0; index < userdata.length; index++ ) { %>
+    <input type="text" value="<%=userdata[index].Username%>" hidden id="<%=[index]%>">
+    <input type="text" value="<%=userdata[index].Phone%>"  hidden id="a<%=[index]%>">
+        <% } %>
+     <input type="Number" value='<%=userdata.length%>' hidden id='number'> 
+
+
 </body>
+<script
+src="https://code.jquery.com/jquery-3.5.1.slim.js"
+integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM="
+crossorigin="anonymous"></script>
+<script>
+$('#submit').on('click',function(){
+    let arr = Number($(`#number`).val())
+    
+    for(let i=0 ; i<arr; i++ ){
+        if($(`#${i}`).val()===$('#username').val()){
+                    $('#password').css("background","white")
+                    $('#phone').css("background","white")
+             return $('#username').css("background","red")
+        }
+       
+        if($(`#a${i}`).val()===$('#phone').val() || $('#phone').val().length <10 || $('#phone').val().length >11 ){
+                  $('#username').css("background","white")
+                  $('#password').css("background","white")
+          return  $('#phone').css("background","red")
+        }
+      
+        if($('#password').val().length<3){
+                    $('#username').css("background","white")
+                    $('#phone').css("background","white")
+            return  $('#password').css("background","red")
+        }
+    }
+    $('#submit').attr('type','submit')
+})
+</script>
 </html>
