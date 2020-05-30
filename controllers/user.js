@@ -16,6 +16,7 @@ router.get('/create',  async (req,res)=>{
 
 
 router.post('/create', async (req,res)=>{
+    let userFlag=false , phoneFlag=false
     try{
         const salt = await bcrypt.genSalt(10)
         const hash =await bcrypt.hash(req.body.password ,salt)
