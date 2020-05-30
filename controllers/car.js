@@ -5,7 +5,15 @@ const db = require('../models');
 // root routes /cars
 
 router.get('/',function(req,res){
-    res.render('car/index');
+    db.Car.find({}, function(error, allCars){
+        if(error){
+            console.log(error);
+        } else {
+            const context = {cars: allCars};
+            res.render('car/index', context);
+        }
+    });
+    
 
 });
 router.get('/new',function(req,res){

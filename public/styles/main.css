@@ -4,18 +4,35 @@ body{
     padding: 0;
     
   }
-.logo {
-    float: left;
+  header {
+      height: 50px;
+      background-color: #DDDDDD
+  }
 
-}
-img{
-    margin-left: 2px;;
-    width: 130px;
-    height: 80px;
-    position: relative;
+header img{
+    margin-left: 2px;
+    width: 100px;
+    height: 50px;
+    float: left;
+    
 }
 .right-menu {
     float: right;
-    margin-right: 20px;
+    margin-right: 40px;
     margin-top: 20px;
+}
+.right-menu a {
+    text-decoration: none;
+    color: black;
+}
+.advertise {
+    height: 250px;
+    background-color: #FAB7B7;
+    
+}
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
 }
