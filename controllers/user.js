@@ -3,10 +3,10 @@ const router = express.Router()
 const db = require('../models')
 const bcrypt= require('bcryptjs');
 
-let userFlag=false , phoneFlag=false
+let userFlag=false , phoneFlag=false, loginFlag=false
 
 router.get('/' ,(req,res)=>{
-   
+   console.log(req.session)
     res.render('user/index' ,  { user: req.session } )
 })
 
@@ -66,11 +66,15 @@ router.get('/login', (req,res)=>{
 router.post('/login', async (req,res)=>{
     console.log(req.body.username)
     try{
-    
+        loginFlag= false
         const foundUser = await db.User.findOne({Username: req.body.username})
-        if(!foundUser){return res.json("Create an Acc")}
+        if(!foundUser){
+                    loginFlag=true;
+            return res.redirect('/login')}
         const pass =await  bcrypt.compare(req.body.password , foundUser.Password)
-        if(!pass){return res.json("pass did not match")}
+        if(!pass){
+            loginFlag=true;
+            return res.redirect('/login')}
         req.session.currentUser= {
             id : foundUser._id ,
             username: foundUser.Username

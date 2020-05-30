@@ -6,9 +6,12 @@
     <title>Document</title>
 </head>
 <body> 
+  <% if (user) { %>
+   <a href="/logout"> logout</a>
+  <% }  else { %>
   <a href="/create"> Create Acc </a> 
     <button>Veiw Cars</button>
     <a href="/login">Login</a>
-    <%= console.log(user) %>
+  <% }%>
 </body>
 </html>
