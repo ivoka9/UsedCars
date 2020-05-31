@@ -106,7 +106,6 @@ router.get('/profile/:id' , async (req,res)=>{
 try{
     
 const userProfile = await db.User.findById(req.params.id)
-console.log(userProfile)
   res.render("user/profile",{userProfile : userProfile})      
 }
 catch(err){
