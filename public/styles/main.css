@@ -6,7 +6,7 @@ body{
   }
   header {
       height: 50px;
-      background-color: #DDDDDD
+      background-color: #142850;
   }
 
 header img{
@@ -23,11 +23,19 @@ header img{
 }
 .right-menu a {
     text-decoration: none;
-    color: black;
+    color: white;
+    padding: 0 10px;
+    margin: 0 10px;
+}
+.right-menu a:hover{
+    background-color: white;
+    color: #EEA200;
+    padding: 20px 10px;
+    
 }
 .advertise {
     height: 230px;
-    background-color: #FAB7B7;
+    background-color: #ffffff;
     
 }
 .container {
@@ -35,17 +43,17 @@ header img{
     justify-content: center;
     align-items: center; 
     height: 270px;
-    background-color: #F5A8A8;
+    background-color: #00909E;
    
 }
 .carlist{
     
-    margin-bottom: 130px;
+    margin-bottom: 100px;
 }
 h2{
     text-align: center;
 }
 .footer{
-    background-color: #E19999;
+    background-color: #DAE1E7;
     height: 60px;
 }

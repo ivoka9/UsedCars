@@ -108,8 +108,8 @@ try{
 const userProfile = await db.User.findById(req.params.id)
 const foundCars = await db.Car.find({user: req.params.id})
 const currentUser = req.session;
-
-res.render("user/profile",{userProfile : userProfile, cars: foundCars,currentUser: currentUser}); 
+console.log(currentUser);
+res.render("user/profile",{userProfile : userProfile, cars: foundCars,currentUser:currentUser}); 
 }   
 
 catch(err){
