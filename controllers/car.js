@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../models');
+const autorization = require('../middlewere/auth.js')
 
 // root routes /cars
 
@@ -17,6 +18,7 @@ router.get('/',function(req,res){
 
 });
 // new route
+<<<<<<< HEAD
 router.get('/new',function(req,res){
     db.User.find({},function(error,foundUser){
         if(error){
@@ -27,11 +29,32 @@ router.get('/new',function(req,res){
         }
     })
     
+=======
+router.get('/new', async function(req,res,next){
+   const userid = autorization(req.session.currentUser,res,next)
+    res.render('car/new' ,{userid: userid});
+>>>>>>> submaster
 })
-
+/*
+ name : {type: String, required: true},
+    price: {type: Number, required: true},
+    year: {type: Number, required: true},
+    mileage: {type: Number, required: true},
+    description: {type: String},
+    user : {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'*/ 
 // create route
-router.post('/', function(req,res){
-    db.Car.create(req.body, function(error, createdCar){
+router.post('/:id', function(req,res){
+    const newCar = {
+        name : req.body.name ,
+        price : req.body.price ,
+        year : req.body.year,
+        mileage: req.body.mileage,
+        description: req.body.description,
+        user: req.params.id
+    }
+    db.Car.create(newCar, function(error, createdCar){
         if(error){
             console.log(error);
         } else {
