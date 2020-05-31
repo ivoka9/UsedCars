@@ -10,8 +10,7 @@ const carSchema = new mongoose.Schema({
     user : {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
-    },
-    img:[{type: String}]
+    }
 }, {timestamps: true});
 
 const Car = mongoose.model('Car',carSchema);
