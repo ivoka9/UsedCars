@@ -18,7 +18,15 @@ router.get('/',function(req,res){
 });
 // new route
 router.get('/new',function(req,res){
-    res.render('car/new');
+    db.User.find({},function(error,foundUser){
+        if(error){
+            console.log(error);
+        }else{
+            const context = {user : foundUser};
+            res.render('car/new', context);
+        }
+    })
+    
 })
 
 // create route
@@ -43,4 +51,28 @@ router.get('/:id', function(req,res){
         }
     });
 });
+
+//edit route
+router.get('/:id/edit', function(req,res){
+    db.Car.findById(req.params.id, function(error, foundCar){
+        if(error){
+            console.log(error);
+        } else {
+            const context = {car: foundCar};
+            res.render('car/edit', context);
+        }
+    });
+});
+
+//update 
+router.put('/:id',function(req,res){
+    db.Car.findByIdAndUpdate(req.params.id,req.body,{new: true},function(error, updatedCar){
+        if(error){
+            console.log(error);
+        } else {
+            res.redirect(`/cars/${updatedCar._id}`);
+        }
+    });
+});
+
 module.exports = router;
