@@ -9,28 +9,28 @@
 <body>
     <header>
         <nav>
-            
+            <a href="/cars">
             <img src="/images/carlogo.png" alt="car logo" class="image">
-           
+           </a>
           
         </nav>
         </header>
         <h1>Edit <%= car.name %> </h1>
         <form action="/cars/<%= car._id %>?_method=PUT " method="post">
             <p>
-                Name: <input type="text" name="name" value="<%= car.name %> " />
+                Name: <input type="text" name="name" value="<%= car.name %>" />
              </p>
              <p>
-               Price: <input type="number" name="price" placeholder="Price"  />
+               Price: <input type="number" name="price" value="<%= car.price %>" />
              </p>
              <p>
-                Year: <input type="number" min="1900" max="2020" name="year" placeholder="year" />
+                Year: <input type="number" min="1900" max="2020" name="year" value="<%= car.year %>" />
              </p>
              <p>
-                Mileage: <input type="number" name="mileage" placeholder="mileage" required />
+                Mileage: <input type="number" name="mileage" value="<%= car.mileage %>" />
              </p>
              <p>
-                Description: <textarea name="description" ></textarea>
+                Description: <textarea name="description" placeholder="description" ></textarea>
              </p>
              <p>
                  <input type="submit" value="Update">

@@ -18,22 +18,9 @@ router.get('/',function(req,res){
 
 });
 // new route
-<<<<<<< HEAD
-router.get('/new',function(req,res){
-    db.User.find({},function(error,foundUser){
-        if(error){
-            console.log(error);
-        }else{
-            const context = {user : foundUser};
-            res.render('car/new', context);
-        }
-    })
-    
-=======
 router.get('/new', async function(req,res,next){
    const userid = autorization(req.session.currentUser,res,next)
     res.render('car/new' ,{userid: userid});
->>>>>>> submaster
 })
 /*
  name : {type: String, required: true},
@@ -58,7 +45,7 @@ router.post('/:id', function(req,res){
         if(error){
             console.log(error);
         } else {
-            res.redirect('/cars');
+            res.redirect(`/profile/${req.params.id}`);
         }
     });
 });
@@ -82,7 +69,9 @@ router.get('/:id/edit', function(req,res){
             console.log(error);
         } else {
             const context = {car: foundCar};
+            console.log(context);
             res.render('car/edit', context);
+            
         }
     });
 });
@@ -93,7 +82,7 @@ router.put('/:id',function(req,res){
         if(error){
             console.log(error);
         } else {
-            res.redirect(`/cars/${updatedCar._id}`);
+            res.redirect(`/profile/${updatedCar.user}`);
         }
     });
 });

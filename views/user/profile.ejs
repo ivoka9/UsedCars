@@ -9,20 +9,27 @@
 <body>
     <header>
         <nav>
-            
+            <a href="/cars">
             <img src="/images/carlogo.png" alt="car logo" class="image">
-           
+           </a>
           
         </nav>
         </header>
+    
+        
+       
+       
+
     <h1>Profile page of <%=userProfile.Username%></h1>
     <a href="/cars/new">Add New car</a>
     <section>
         <h2>Cars</h2>
-        <% user.cars.forEach(car => { %>
+       
+        <%cars.forEach(car => { %>
             <li>
-                <a href="/cars/<%= car._id %>"><%= car.name %> </a>
+                <a href="/user/profile/<%= car._id %>"><%= car.name %> </a>
             Price: <%= car.price %> 
+            <a href="/cars/<%= car._id %>/edit">Edit</a>
             </li>
         <% }) %>
     </section>
