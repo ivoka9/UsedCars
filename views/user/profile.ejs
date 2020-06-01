@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/main.css">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/cars">
+            <img src="/images/carlogo.png" alt="car logo" class="image">
+           </a>
+          
+        </nav>
+        </header>
+    
+        
+     
+      <% if(currentUser.id == userProfile._id) {%>  
+
+    <h1>Profile page of <%=userProfile.Username%></h1>
+    <a href="/cars/new">Add New car</a>
+      <% } %> 
+    <section>
+        <h2>Cars</h2>
+       
+        <%cars.forEach(car => { %>
+            <li>
+                <a href="/user/profile/<%= car._id %>"><%= car.name %> </a>
+            Price: <%= car.price %> 
+            <a href="/cars/<%= car._id %>/edit">Edit</a>
+            <form action="/cars/<%= car._id %>?_method=DELETE" method="POST">
+            <input type="submit" value="Delete">
+            </form>
+            </li>
+        <% }) %>
+    </section>
+    
+</body>
+</html>

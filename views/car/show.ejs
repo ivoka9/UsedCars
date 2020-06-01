@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/main.css">
+    <title>Car Details Page</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/cars">
+           <img src="/images/carlogo.png" alt="car logo" class="image"> 
+         </a>
+           <div class="right-menu">
+          
+                <a href="/login">Login</a>
+                <a href="/create">Register</a>
+                       
+            </div>
+                </nav>
+                </header>
+           
+    <section>
+        
+        </ul>
+        <h2>Car Details</h2>
+        <ul>
+            <p><li>Name: <%= car.name %>  </li></p>
+            <p><li>Price: <%= car.price %> </li></p>
+            <p><li>Year: <%= car.year %> </li></p>
+            <p><li>Mileage: <%= car.mileage %> </li></p>
+            <p><li>Description: <%= car.description %> </li></p>
+            <p><li><a href="/profile/<%= car.user %>">More listings from this user </a></li></p>
+
+            
+        </ul>
+    </section>
+</body>
+</html>

@@ -1,0 +1,62 @@
+body{
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    
+  }
+  header {
+      height: 50px;
+      background-color: #142850;
+  }
+
+header img{
+    margin-left: 2px;
+    width: 100px;
+    height: 50px;
+    float: left;
+    
+}
+.right-menu {
+    float: right;
+    margin-right: 40px;
+    margin-top: 20px;
+}
+.right-menu a {
+    text-decoration: none;
+    color: white;
+    padding: 0 10px;
+    margin: 0 10px;
+}
+.right-menu a:hover{
+    background-color: white;
+    color: #EEA200;
+    padding: 20px 10px;
+    
+}
+.advertise {
+    height: 0px;
+    background-color: #ffffff;
+    
+}
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    height: calc( 100vh - 210px );
+    background-color: #00909E;
+}
+
+h2{
+    text-align: center;
+}
+.footer{
+    background-color: #DAE1E7;
+    height: 60px;
+}
+
+.car{
+   border: 1px solid red;
+    text-align: center;
+    background-color: yellow;
+
+}

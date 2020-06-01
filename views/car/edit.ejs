@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/main.css">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/cars">
+            <img src="/images/carlogo.png" alt="car logo" class="image">
+           </a>
+           
+        </nav>
+        </header>
+        <h1>Edit <%= car.name %> </h1>
+        <form action="/cars/<%= car._id %>?_method=PUT " method="post">
+            <p>
+                Name: <input type="text" name="name" value="<%= car.name %>" />
+             </p>
+             <p>
+               Price: <input type="number" name="price" value="<%= car.price %>" />
+             </p>
+             <p>
+                Year: <input type="number" min="1900" max="2020" name="year" value="<%= car.year %>" />
+             </p>
+             <p>
+                Mileage: <input type="number" name="mileage" value="<%= car.mileage %>" />
+             </p>
+             <p>
+                Description: <textarea name="description" placeholder="description" ></textarea>
+             </p>
+             <p>
+                 <input type="submit" value="Update">
+             </p>
+        </form>
+</body>
+</html>
