@@ -6,12 +6,12 @@ const fs= require('fs')
 
 let userFlag=false , phoneFlag=false, loginFlag=false ,passwordFlag= false;
 
-// if  based on the session it will eather show him to log in or logout
+// based on the session it will either show him to log in or logout
 router.get('/' ,(req,res)=>{
     res.render('user/index' ,  { user: req.session } )
 })
 
-// Creating a use 
+// Creating a user 
 router.get('/create',  async (req,res)=>{
     
     res.render('user/newAcc' , {
@@ -90,7 +90,7 @@ router.post('/login', async (req,res)=>{
             id : foundUser._id ,
             username: foundUser.Username
         }
-        res.redirect('/')
+        res.redirect('/cars')
     }
     catch(err){
         res.redirect('/login')
@@ -99,9 +99,9 @@ router.post('/login', async (req,res)=>{
 })
 
 
-router.post('/logout' , async (req,res)=>{
+router.get('/logout' , async (req,res)=>{
     await req.session.destroy();
-    res.redirect('/')
+    res.redirect('/cars')
 })
 
 router.get('/profile/:id' , async (req,res)=>{
@@ -117,7 +117,7 @@ catch{
     flag = false
 }
 
-res.render("user/profile",{userProfile : userProfile, cars: foundCars, flag:flag}); 
+res.render("user/profile",{userProfile : userProfile, cars: foundCars, flag:flag,user: req.session}); 
 }   
 
 catch(err){

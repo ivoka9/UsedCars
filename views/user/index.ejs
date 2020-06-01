@@ -19,23 +19,18 @@
          <form action="/logout" method="POST">
           <button type="submit"	>Logout</button>
          </form>
-        </div>
+        
       </nav>
     </header>
          <h1>Welcome <%=user.currentUser.username%></h1>
          <a href="/profile/<%=user.currentUser.id%>">Profile</a>
         <% }  else { %>
-
-          <header>
-            <nav>
-                <a href="/cars">
-               <img src="/images/carlogo.png" alt="car logo" class="image"> 
-             </a>
-               <div class="right-menu">
+          
+               
                    <a href="/login">Login</a>
                    <a href="/create">Register</a>
                    
-               </div>
+        </div> 
             </nav>
             </header>
         <% }%>

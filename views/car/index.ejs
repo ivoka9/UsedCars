@@ -5,32 +5,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="/styles/main.css">
+<<<<<<< HEAD
+=======
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+>>>>>>> 1bab1adb5ada24cfcc6073b9cc0844a41e096205
 
   <title>Home Page</title>
 </head>
 <body>
-    <header>
- <nav>
-     <a href="/cars">
-    <img src="/images/carlogo.png" alt="car logo" class="image">
-  </a>
-    <div class="right-menu">
-        <a href="/login">Login</a>
-        <a href="/create">Register</a>
-
-    </div>
- </nav>
- </header>
+  <header>
+    <nav>
+        <a href="/cars">
+       <img src="/images/carlogo.png" alt="car logo" class="image"> 
+     </a>
+       <div class="right-menu">
+        <% console.log(user.currentUser)%>
+        <% if (user.currentUser) { %>
+          <a href="/profile/<%=user.currentUser.id%>" class="profile">Profile</a>
+         
+        <a href="/logout">Logout</a> 
+         </form>
+         
+      </nav>
+    </header>
+         
+        <% }  else { %>
+          
+               
+                   <a href="/login">Login</a>
+                   <a href="/create">Register</a>
+                   
+        </div> 
+            </nav>
+            </header>
+        <% }%>
+         
  <section class="advertise">
 
  </section>
- <h2>List of Cars</h2>
+
  <div class = "container">
 
     <% cars.forEach(car => { %>
     <div class="car">
       <img src="<%=car.img[0]%>"  height="150px" width="150px" alt="" srcset="">
-      <%= car.secondid.lenght %>
+      <%= car.secondid.length %>
       <div class="name">
       <a href="/cars/<%= car._id %>"><%= car.name %> </a>
       </div>  
@@ -39,7 +59,6 @@
       </div>  
     </div>
       <% }) %>
-
 </div>
 <footer class = "footer">
 

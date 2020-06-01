@@ -10,12 +10,31 @@
     <header>
         <nav>
             <a href="/cars">
-            <img src="/images/carlogo.png" alt="car logo" class="image">
-           </a>
-           
-        </nav>
+           <img src="/images/carlogo.png" alt="car logo" class="image"> 
+         </a>
+           <div class="right-menu">
+            <% console.log(user.currentUser)%>
+            <% if (user.currentUser) { %>
+             
+                <a href="/logout">Logout</a> 
+            
+          </nav>
         </header>
-        <h1>Edit <%= car.name %> </h1>
+            
+            <% }  else { %>
+              
+                   
+                       <a href="/login">Login</a>
+                       <a href="/create">Register</a>
+                       
+            </div> 
+                </nav>
+                </header>
+            <% }%>
+            <h1 class="editform">Edit <%= car.name %> </h1>
+            <div class="contain">
+            <div class="formnew">
+        
         <form action="/cars/<%= car._id %>?_method=PUT " method="post">
             <p>
                 Name: <input type="text" name="name" value="<%= car.name %>" />
@@ -33,8 +52,10 @@
                 Description: <textarea name="description" placeholder="description" ></textarea>
              </p>
              <p>
-                 <input type="submit" value="Update">
+                 <input type="submit" value="Update" class="submit">
              </p>
         </form>
+    </div>
+</div>
 </body>
 </html>
