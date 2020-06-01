@@ -16,6 +16,7 @@ router.get('/',function(req,res){
             console.log(error);
         } else {
             const context = {cars: allCars};
+            
             res.render('car/index', context);
         }
     });
@@ -31,11 +32,11 @@ router.get('/new', async function(req,res,next){
  
 // create route
 router.post('/:id', function(req,res){
-const secondid = Number(Date.now())
+let secondid = Number(Date.now())
     const storage = multer.diskStorage({
-        destination: `./public/${req.params.id}/${secondid}`  ,
+        destination: `./public/users/${req.params.id}/${secondid}`  ,
         filename: function(req,file,cb){
-            cb(null, file.fieldname+'-'+secondid+path.extname(
+            cb(null, file.fieldname+'-'+Date.now()+path.extname(
                 file.originalname
             ));
         }
@@ -47,8 +48,10 @@ const secondid = Number(Date.now())
     upload(req, res, (err)=>{
         if(err){console.log(err)}
         else{
+            arr=[]
          for(let i=0 ; i< req.files.length ; i++ ){
-             arr.push(req.files[i].path)
+             const img =req.files[i].path.replace("public",'')
+             arr.push(img)
          }
 
             const newCar = {
@@ -96,7 +99,6 @@ router.get('/:id/edit', function(req,res){
             console.log(error);
         } else {
             const context = {car: foundCar};
-            console.log(context);
             res.render('car/edit', context);
             
         }

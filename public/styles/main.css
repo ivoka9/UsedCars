@@ -34,26 +34,29 @@ header img{
     
 }
 .advertise {
-    height: 230px;
+    height: 0px;
     background-color: #ffffff;
     
 }
 .container {
     display: flex;
-    justify-content: center;
-    align-items: center; 
-    height: 270px;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    height: calc( 100vh - 210px );
     background-color: #00909E;
-   
 }
-.carlist{
-    
-    margin-bottom: 100px;
-}
+
 h2{
     text-align: center;
 }
 .footer{
     background-color: #DAE1E7;
     height: 60px;
+}
+
+.car{
+   border: 1px solid red;
+    text-align: center;
+    background-color: yellow;
+
 }

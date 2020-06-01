@@ -5,42 +5,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="/styles/main.css">
-  
+
   <title>Home Page</title>
 </head>
 <body>
     <header>
  <nav>
      <a href="/cars">
-    <img src="/images/carlogo.png" alt="car logo" class="image"> 
+    <img src="/images/carlogo.png" alt="car logo" class="image">
   </a>
     <div class="right-menu">
         <a href="/login">Login</a>
         <a href="/create">Register</a>
-        
+
     </div>
  </nav>
  </header>
  <section class="advertise">
 
  </section>
- <section class = "container">
- <div class = "carlist">
-      
-      <h2>List of Cars</h2>
-      <ul>
-          <% cars.forEach(car => { %>
-            <li>
-                <a href="/cars/<%= car._id %>"><%= car.name %> </a>
-            Price: <%= car.price %> 
-            
-            </li>
-            
-          <% }) %>
-          
-      </ul>
+ <h2>List of Cars</h2>
+ <div class = "container">
+
+    <% cars.forEach(car => { %>
+    <div class="car">
+      <img src="<%=car.img[0]%>"  height="150px" width="150px" alt="" srcset="">
+      <%= car.secondid.lenght %>
+      <div class="name">
+      <a href="/cars/<%= car._id %>"><%= car.name %> </a>
+      </div>  
+      <div class='text'>
+      Price: <%= car.price %>
+      </div>  
     </div>
-</section>
+      <% }) %>
+
+</div>
 <footer class = "footer">
 
 </footer>
