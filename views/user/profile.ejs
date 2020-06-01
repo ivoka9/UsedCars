@@ -38,6 +38,12 @@
             <% }%>
             
         <% }) %>
+        <% if(flag){ %>
+            <form action="/delacc/<%=userProfile.id%>?_method=Delete" method="post">
+                <input type="submit" value="Delacc">
+            </form>
+            <% }%>
+
     </section>
     
 </body>

@@ -132,9 +132,7 @@ router.delete('/:id',function(req,res){
                 fs.unlink(`./public/${deletedCar.img[i][0]}`,function(){})
            
            }
-           console.log(`users/${deletedCar.secondid}`)
            fs.rmdir(`./public/users/${deletedCar.user}/${deletedCar.secondid}`,function(){
-               console.log("done")
            })
            res.redirect(`/profile/${deletedCar.user}`);
         }

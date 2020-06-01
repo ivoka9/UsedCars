@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const db = require('../models')
 const bcrypt= require('bcryptjs');
+const fs= require('fs')
 
 let userFlag=false , phoneFlag=false, loginFlag=false ,passwordFlag= false;
 
@@ -124,6 +125,31 @@ catch(err){
     res.redirect('/profile')
 }
 });
+
+router.delete('/delacc/:id', async (req,res)=>{
+  await  req.session.destroy()
+  let deletedCar
+    try {
+        const delUser= await db.User.findByIdAndDelete(req.params.id)
+        const delCars= await db.Car.find({user : req.params.id})
+       
+        for(let i=0 ; i<delCars.length; i++){
+            console.log(delCars[i]._id)
+            deletedCar = await db.Car.findByIdAndDelete(delCars[i]._id)               
+            for(let i=0 ; i<deletedCar.img.length ;i++) {
+                fs.unlink(`./public/${deletedCar.img[i][0]}`,function(){})
+            }        
+            fs.rmdir(`./public/users/${deletedCar.user}/${deletedCar.secondid}`,function(){})
+                     
+        }
+        fs.rmdir(`./public/users/${deletedCar.secondid}`,function(){}) 
+        res.redirect('/cars')
+     }
+    catch(err){
+        res.json(err)
+        console.log(err)
+    }
+})
 
 
 module.exports= router
