@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../models');
-
+const fs = require('fs')
 const autorization = require('../middlewere/auth.js')
 const multer = require('multer')
 const path= require('path')
@@ -120,11 +120,27 @@ router.put('/:id',function(req,res){
 router.delete('/:id',function(req,res){
 
      db.Car.findByIdAndDelete(req.params.id,function(error,deletedCar){
+        try{
          if(error){
              console.log(error);
-         } else {
-            res.redirect(`/profile/${deletedCar.user}`);
+             
+         } 
+        
+         else {
+           for(let i=0 ; i<deletedCar.img.length ;i++) {
+              
+                fs.unlink(`./public/${deletedCar.img[i][0]}`,function(){})
+           
+           }
+           console.log(`users/${deletedCar.secondid}`)
+           fs.rmdir(`./public/users/${deletedCar.user}/${deletedCar.secondid}`,function(){
+               console.log("done")
+           })
+           res.redirect(`/profile/${deletedCar.user}`);
+        }
+           
          }
+         catch(err){console.log(err)}
      });
     });
 
