@@ -16,20 +16,21 @@
         </nav>
         </header>
     
-        
+         
      
-      <% if(currentUser.id == userProfile._id) {%>  
-
+        
     <h1>Profile page of <%=userProfile.Username%></h1>
     <a href="/cars/new">Add New car</a>
-      <% } %> 
+      
     <section>
         <h2>Cars</h2>
        
         <%cars.forEach(car => { %>
+            <% if(currentUser.id !== userProfile._id) { %> 
             <li>
                 <a href="/user/profile/<%= car._id %>"><%= car.name %> </a>
             Price: <%= car.price %> 
+            <% } %> 
             <a href="/cars/<%= car._id %>/edit">Edit</a>
             <form action="/cars/<%= car._id %>?_method=DELETE" method="POST">
             <input type="submit" value="Delete">

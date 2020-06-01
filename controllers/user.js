@@ -7,10 +7,10 @@ let userFlag=false , phoneFlag=false, loginFlag=false ,passwordFlag= false;
 
 // if  based on the session it will eather show him to log in or logout
 router.get('/' ,(req,res)=>{
-    res.render('user/index' ,  { user: req.session } )
+    res.render('user/index' ,  { user: req.session} )
 })
 
-// Creating a use 
+// Creating a user 
 router.get('/create',  async (req,res)=>{
     
     res.render('user/newAcc' , {
@@ -97,9 +97,9 @@ router.post('/login', async (req,res)=>{
 })
 
 
-router.post('/logout' , async (req,res)=>{
+router.delete('/logout' , async (req,res)=>{
     await req.session.destroy();
-    res.redirect('/')
+    res.redirect('/cars')
 })
 
 router.get('/profile/:id' , async (req,res)=>{
@@ -107,9 +107,11 @@ try{
     
 const userProfile = await db.User.findById(req.params.id)
 const foundCars = await db.Car.find({user: req.params.id})
+
 const currentUser = req.session;
+
 console.log(currentUser);
-res.render("user/profile",{userProfile : userProfile, cars: foundCars,currentUser:currentUser}); 
+res.render("user/profile",{userProfile : userProfile, cars: foundCars,currentUser: currentUser}); 
 }   
 
 catch(err){

@@ -2,15 +2,17 @@ const express = require('express');
 const router = express.Router();
 const db = require('../models');
 
-const autorization = require('../middlewere/auth.js')
+const authorization = require('../middlewere/auth.js')
 
 // root routes /cars
 
 router.get('/',function(req,res){
+  
     db.Car.find({}, function(error, allCars){
         if(error){
             console.log(error);
         } else {
+            
             const context = {cars: allCars};
             res.render('car/index', context);
         }
@@ -19,8 +21,8 @@ router.get('/',function(req,res){
 
 });
 // new route
-router.get('/new', async function(req,res,next){
-   const userid = autorization(req.session.currentUser,res,next)
+router.get('/new', function(req,res,next){
+   const userid = authorization(req.session.currentUser,res,next)
     res.render('car/new' ,{userid: userid});
 })
 
@@ -51,7 +53,7 @@ router.get('/:id', function(req,res){
         if(error){
             console.log(error);
         } else {
-
+           
             const context = {car: foundCar};
             res.render('car/show', context);
         }
