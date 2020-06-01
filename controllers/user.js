@@ -69,6 +69,7 @@ router.post('/create', async (req,res)=>{
 
 
 router.get('/login', (req,res)=>{
+    const flag = false
     res.render('user/login',{loginFlag : loginFlag})
 })
 
@@ -107,9 +108,15 @@ try{
     
 const userProfile = await db.User.findById(req.params.id)
 const foundCars = await db.Car.find({user: req.params.id})
-const currentUser = req.session;
-console.log(currentUser);
-res.render("user/profile",{userProfile : userProfile, cars: foundCars,currentUser:currentUser}); 
+try{
+  flag =(req.session.currentUser.username==userProfile.Username);
+}
+catch{
+    console.log('need')
+    flag = false
+}
+
+res.render("user/profile",{userProfile : userProfile, cars: foundCars, flag:flag}); 
 }   
 
 catch(err){

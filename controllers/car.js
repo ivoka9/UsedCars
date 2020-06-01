@@ -3,6 +3,10 @@ const router = express.Router();
 const db = require('../models');
 
 const autorization = require('../middlewere/auth.js')
+const multer = require('multer')
+const path= require('path')
+
+let arr=[]
 
 // root routes /cars
 
@@ -12,37 +16,67 @@ router.get('/',function(req,res){
             console.log(error);
         } else {
             const context = {cars: allCars};
+            
             res.render('car/index', context);
         }
     });
     
 
 });
-// new route
+// new route //
 router.get('/new', async function(req,res,next){
    const userid = autorization(req.session.currentUser,res,next)
     res.render('car/new' ,{userid: userid});
 })
 
+ 
 // create route
 router.post('/:id', function(req,res){
-    
-    const newCar = {
-        
-        name : req.body.name ,
-        price : req.body.price ,
-        year : req.body.year,
-        mileage: req.body.mileage,
-        description: req.body.description,
-        user: req.params.id
-    }
-    db.Car.create(newCar, function(error, createdCar){
-        if(error){
-            console.log(error);
-        } else {
-            res.redirect(`/profile/${req.params.id}`);
+let secondid = Number(Date.now())
+    const storage = multer.diskStorage({
+        destination: `./public/users/${req.params.id}/${secondid}`  ,
+        filename: function(req,file,cb){
+            cb(null, file.fieldname+'-'+Date.now()+path.extname(
+                file.originalname
+            ));
         }
-    });
+    })
+    const upload = multer({
+        storage:storage
+    }).array('imgName' ,5)
+
+    upload(req, res, (err)=>{
+        if(err){console.log(err)}
+        else{
+            arr=[]
+         for(let i=0 ; i< req.files.length ; i++ ){
+             const img =req.files[i].path.replace("public",'')
+             arr.push(img)
+         }
+
+            const newCar = {
+                name : req.body.name ,
+                price : req.body.price ,
+                year : req.body.year,
+                mileage: req.body.mileage,
+                description: req.body.description,
+                user: req.params.id,
+                img : arr,
+                secondid: secondid
+            }
+            db.Car.create(newCar, async function(error, createdCar){
+                if(error){
+                    console.log(error);
+                } else {
+                  
+                    res.redirect('/cars');
+                }
+            });
+        }
+    })
+
+   
+    
 });
 
 // show route
@@ -65,7 +99,6 @@ router.get('/:id/edit', function(req,res){
             console.log(error);
         } else {
             const context = {car: foundCar};
-            console.log(context);
             res.render('car/edit', context);
             
         }
@@ -94,6 +127,9 @@ router.delete('/:id',function(req,res){
          }
      });
     });
+
+
+router.get('/carprofile/:carid')    
        
         
  
