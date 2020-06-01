@@ -15,24 +15,24 @@
        <div class="right-menu">
         <% console.log(user.currentUser)%>
         <% if (user.currentUser) { %>
-          
-         <form action="/logout?_method=DELETE" method="POST">
-          <input type="submit" value="Logout">
          
+         <form action="/logout" method="POST">
+          <button type="submit"	>Logout</button>
          </form>
-        </div>
+        
       </nav>
     </header>
          <h1>Welcome <%=user.currentUser.username%></h1>
          <a href="/profile/<%=user.currentUser.id%>">Profile</a>
         <% }  else { %>
-
           
+               
                    <a href="/login">Login</a>
                    <a href="/create">Register</a>
                    
-               
-            
+        </div> 
+            </nav>
+            </header>
         <% }%>
          
        

@@ -1,5 +1,6 @@
 // bring database
 const mongoose = require('mongoose');
+
 // create schema
 const carSchema = new mongoose.Schema({
    
@@ -11,7 +12,10 @@ const carSchema = new mongoose.Schema({
     user : {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
-    }
+    },
+    img: [{type:Array}],
+    secondid: {type: Number}
+
 }, {timestamps: true});
 
 const Car = mongoose.model('Car',carSchema);
