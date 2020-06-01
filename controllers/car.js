@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../models');
+
 const autorization = require('../middlewere/auth.js')
 
 // root routes /cars
@@ -22,18 +23,12 @@ router.get('/new', async function(req,res,next){
    const userid = autorization(req.session.currentUser,res,next)
     res.render('car/new' ,{userid: userid});
 })
-/*
- name : {type: String, required: true},
-    price: {type: Number, required: true},
-    year: {type: Number, required: true},
-    mileage: {type: Number, required: true},
-    description: {type: String},
-    user : {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'*/ 
+
 // create route
 router.post('/:id', function(req,res){
+    
     const newCar = {
+        
         name : req.body.name ,
         price : req.body.price ,
         year : req.body.year,
@@ -45,7 +40,7 @@ router.post('/:id', function(req,res){
         if(error){
             console.log(error);
         } else {
-            res.redirect('/cars');
+            res.redirect(`/profile/${req.params.id}`);
         }
     });
 });
@@ -56,9 +51,50 @@ router.get('/:id', function(req,res){
         if(error){
             console.log(error);
         } else {
+
             const context = {car: foundCar};
             res.render('car/show', context);
         }
     });
 });
+
+//edit route
+router.get('/:id/edit', function(req,res){
+    db.Car.findById(req.params.id, function(error, foundCar){
+        if(error){
+            console.log(error);
+        } else {
+            const context = {car: foundCar};
+            console.log(context);
+            res.render('car/edit', context);
+            
+        }
+    });
+});
+
+//update 
+router.put('/:id',function(req,res){
+    db.Car.findByIdAndUpdate(req.params.id,req.body,{new: true},function(error, updatedCar){
+        if(error){
+            console.log(error);
+        } else {
+            res.redirect(`/profile/${updatedCar.user}`);
+        }
+    });
+});
+
+//delete route
+router.delete('/:id',function(req,res){
+
+     db.Car.findByIdAndDelete(req.params.id,function(error,deletedCar){
+         if(error){
+             console.log(error);
+         } else {
+            res.redirect(`/profile/${deletedCar.user}`);
+         }
+     });
+    });
+       
+        
+ 
 module.exports = router;

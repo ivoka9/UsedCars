@@ -106,13 +106,17 @@ router.get('/profile/:id' , async (req,res)=>{
 try{
     
 const userProfile = await db.User.findById(req.params.id)
-  res.render("user/profile",{userProfile : userProfile})      
-}
+const foundCars = await db.Car.find({user: req.params.id})
+const currentUser = req.session;
+console.log(currentUser);
+res.render("user/profile",{userProfile : userProfile, cars: foundCars,currentUser:currentUser}); 
+}   
+
 catch(err){
     console.log(err)
-    res.redirect('/')
+    res.redirect('/profile')
 }
-})
+});
 
 
 module.exports= router
