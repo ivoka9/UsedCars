@@ -22,7 +22,7 @@ router.get('/',function(req,res){
     
 
 });
-// new route
+// new route //
 router.get('/new', async function(req,res,next){
    const userid = autorization(req.session.currentUser,res,next)
     res.render('car/new' ,{userid: userid});
