@@ -2,15 +2,16 @@ const express = require('express')
 const router = express.Router()
 const db = require('../models')
 const bcrypt= require('bcryptjs');
+const fs= require('fs')
 
 let userFlag=false , phoneFlag=false, loginFlag=false ,passwordFlag= false;
 
-// if  based on the session it will eather show him to log in or logout
+// based on the session it will either show him to log in or logout
 router.get('/' ,(req,res)=>{
     res.render('user/index' ,  { user: req.session } )
 })
 
-// Creating a use 
+// Creating a user 
 router.get('/create',  async (req,res)=>{
     
     res.render('user/newAcc' , {
@@ -89,7 +90,7 @@ router.post('/login', async (req,res)=>{
             id : foundUser._id ,
             username: foundUser.Username
         }
-        res.redirect('/')
+        res.redirect('/cars')
     }
     catch(err){
         res.redirect('/login')
@@ -98,9 +99,9 @@ router.post('/login', async (req,res)=>{
 })
 
 
-router.post('/logout' , async (req,res)=>{
+router.get('/logout' , async (req,res)=>{
     await req.session.destroy();
-    res.redirect('/')
+    res.redirect('/cars')
 })
 
 router.get('/profile/:id' , async (req,res)=>{
@@ -116,7 +117,7 @@ catch{
     flag = false
 }
 
-res.render("user/profile",{userProfile : userProfile, cars: foundCars, flag:flag}); 
+res.render("user/profile",{userProfile : userProfile, cars: foundCars, flag:flag,user: req.session}); 
 }   
 
 catch(err){
@@ -124,6 +125,31 @@ catch(err){
     res.redirect('/profile')
 }
 });
+
+router.delete('/delacc/:id', async (req,res)=>{
+  await  req.session.destroy()
+  let deletedCar
+    try {
+        const delUser= await db.User.findByIdAndDelete(req.params.id)
+        const delCars= await db.Car.find({user : req.params.id})
+       
+        for(let i=0 ; i<delCars.length; i++){
+            console.log(delCars[i]._id)
+            deletedCar = await db.Car.findByIdAndDelete(delCars[i]._id)               
+            for(let i=0 ; i<deletedCar.img.length ;i++) {
+                fs.unlink(`./public/${deletedCar.img[i][0]}`,function(){})
+            }        
+            fs.rmdir(`./public/users/${deletedCar.user}/${deletedCar.secondid}`,function(){})
+                     
+        }
+        fs.rmdir(`./public/users/${deletedCar.secondid}`,function(){}) 
+        res.redirect('/cars')
+     }
+    catch(err){
+        res.json(err)
+        console.log(err)
+    }
+})
 
 
 module.exports= router

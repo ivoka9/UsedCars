@@ -13,13 +13,24 @@
            <img src="/images/carlogo.png" alt="car logo" class="image"> 
          </a>
            <div class="right-menu">
-          
-                <a href="/login">Login</a>
-                <a href="/create">Register</a>
+            <% console.log(user.currentUser)%>
+            <% if (user.currentUser) { %>
+             
+              <a href="/logout">Logout</a> 
+            
+          </nav>
+        </header>
+             
+            <% }  else { %>
+              
+                   
+                       <a href="/login">Login</a>
+                       <a href="/create">Register</a>
                        
-            </div>
+            </div> 
                 </nav>
                 </header>
+            <% }%>
            
     <section>
         

@@ -5,9 +5,11 @@ body{
     
   }
   header {
+    
       height: 50px;
       background-color: #142850;
   }
+  
 
 header img{
     margin-left: 2px;
@@ -30,33 +32,65 @@ header img{
 .right-menu a:hover{
     background-color: white;
     color: #EEA200;
-    padding: 20px 10px;
+    padding: 10px 10px;
     
 }
 .advertise {
-    height: 0px;
-    background-color: #ffffff;
-    
+    height: 270px;
+    background-image: url('chev.png');
+    background-size: cover;
 }
 .container {
+   
+    margin-top: 10px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    height: calc( 100vh - 210px );
-    background-color: #00909E;
+    /* height: calc( 100vh - 210px ); */
+    height: 210px;
+    background-color: #00909E transparent;
 }
 
 h2{
     text-align: center;
 }
 .footer{
+    margin-top: 10px;
     background-color: #DAE1E7;
     height: 60px;
+    
 }
 
 .car{
-   border: 1px solid red;
+   border: 1px solid grey;
     text-align: center;
-    background-color: yellow;
+    background-color: #DAE1E7;
 
+}
+.contain{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+ 
+.formnew{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 500px;
+    height: 400px;
+    margin-top: 10px;  
+    background-color: whitesmoke;
+}
+
+.submit{
+    margin-left: 80px;
+}
+.profileshow {
+    margin-left: 50px;
+}
+.editform{
+    text-align: center;
 }
