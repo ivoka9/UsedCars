@@ -32,6 +32,9 @@
             <p><li>Mileage: <%= car.mileage %> </li></p>
             <p><li>Description: <%= car.description %> </li></p>
             <p><li><a href="/profile/<%= car.user %>">More listings from this user </a></li></p>
+            <% for( let index = 0; index < car.img.length; index++ ) { %>
+            <img src="<%=car.img[index]%>" height="100px" width="100px" alt="">
+            <% } %>
 
             
         </ul>
