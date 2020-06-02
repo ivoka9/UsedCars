@@ -64,7 +64,7 @@ router.post('/create', async (req,res)=>{
     }
     catch(err){
         if(err){console.log(err)}
-        res.redirect('/cars')
+        res.redirect('/cars?page=1')
     }
 })
 
@@ -90,7 +90,7 @@ router.post('/login', async (req,res)=>{
             id : foundUser._id ,
             username: foundUser.Username
         }
-        res.redirect('/cars')
+        res.redirect('/cars?page=1')
     }
     catch(err){
         res.redirect('/login')
