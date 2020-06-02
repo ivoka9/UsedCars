@@ -11,7 +11,6 @@ let arr=[]
 // root routes /cars
 
 router.get('/',function(req,res){
-    
     db.Car.find({}, function(error, allCars){
         if(error){
             console.log(error);
@@ -20,7 +19,7 @@ router.get('/',function(req,res){
           sort(allCars,req.query.sortby)
           
             
-            const context = {cars: allCars, user: req.session};
+            const context = {cars: allCars, user: req.session, page:req.query.page};
           res.render('car/index', context);
         }
     });
@@ -77,7 +76,7 @@ let secondid = Number(Date.now())
                     console.log(error);
                 } else {
                   
-                    res.redirect('/cars');
+                    res.redirect('/cars?page=1');
                 }
             });
         }

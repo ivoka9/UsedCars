@@ -10,11 +10,11 @@
 <body>
     <header>
         <nav>
-            <a href="/cars">
+            <a href="/cars?page=1">
            <img src="/images/carlogo.png" alt="car logo" class="image"> 
          </a>
            <div class="right-menu">
-            <% console.log(user.currentUser)%>
+         
             <% if (user.currentUser) { %>
               <a href="/profile/<%=user.currentUser.id%>" class="profile">Profile</a>
              

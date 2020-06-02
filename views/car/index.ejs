@@ -13,7 +13,7 @@
 <body>
   <header>
     <nav>
-        <a href="/cars">
+        <a href="/cars?page=1">
        <img src="/images/carlogo.png" alt="car logo" class="image"> 
      </a>
        <div class="right-menu">
@@ -49,29 +49,45 @@
   <button type="submit">Submit</button>
 
  <div class = "container1">
-
-  <nav aria-label="...">
-    <ul class="pagination pagination-lg">
-      <li class="page-item " name='page'>
-        <a class="page-link" href="#" value='1' tabindex="-1">1</a>
+  <%  page= Number(page);  %>
+  <nav aria-label="..." name='nav'>
+    <ul class="pagination pagination-lg" name='ul'>
+      <li class="page-item " name='page'> 
+      
+          <a class="page-link"  
+          <%if(page-1!=0){%>
+          href="?page=<%=page-1%>"  
+          <%} %>
+          >Previus</a>    
       </li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item " name='page'> 
+       
+          <a class="page-link" href="?page=<%=page%>"  ><%=page%></a>    
+             
+      </li>
+      <li class="page-item " name='page'> 
+          <a class="page-link" 
+          <%if(page<=(cars.length/3)){%>
+            href="?page=<%=page+1%>"  
+            <%} %>
+          >Next</a>    
+             
+      </li>
     </ul>
   </nav>
-  
-  <% cars.forEach(car => { %>
+ 
+   <% for( let i =0+((3*page)-3) ; i < cars.length && i < 3*(page) ; i++) { %>
     <div class="car">
-      <img src="<%=car.img[0]%>"  height="150px" width="150px" alt="" srcset="">
-      <%= car.secondid.length %>
+      <img src="<%=cars[i].img[0]%>"  height="150px" width="150px" alt="" srcset="">
+      <%= cars[i].secondid.length %>
       <div class="name">
-      <a href="/cars/<%= car._id %>"><%= car.name %> </a>
+      <a href="/cars/<%= cars[i]._id %>"><%= cars[i].name %> </a>
       </div>  
       <div class='text'>
-      Price: <%= car.price %>
+      Price: <%= cars[i].price %>
       </div>  
     </div>
-      <% }) %>
+      <% } %>
 </div>
 <footer class = "footer">
 
