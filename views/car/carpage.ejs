@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/cars">
+           <img src="/images/carlogo.png" alt="car logo" class="image"> 
+         </a>
+           <div class="right-menu">
+            <% console.log(user.currentUser)%>
+            <% if (user.currentUser) { %>
+              <a href="/profile/<%=user.currentUser.id%>" class="profile">Profile</a>
+             
+            <a href="/logout">Logout</a> 
+             </form>
+             
+          </nav>
+        </header>
+             
+            <% }  else { %>
+              
+                   
+                       <a href="/login">Login</a>
+                       <a href="/create">Register</a>
+                       
+            </div> 
+                </nav>
+                </header>
+            <% }%>
+             
+     <section class="advertise">
+    
+     </section>
+    
+    <div class="container">
+        <div class="row">
+            <% for (var i = 0; i < cars.length; i++) { %>
+                <div class="col-md-4">
+                    <div class="thumbnail">
+                        <div class="car">
+                        <img src="<%=cars.img[i]%>"  height="150px" width="150px" alt="" srcset="">
+                        <div class="caption">
+                            <div class="name">
+                                <a href="/cars/<%= cars._id %>"><%= cars.name %> </a>
+                                </div>  
+                                <div class='text'>
+                                Price: <%= cars.price %>
+                                </div>  
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+            <% if (pages > 0) { %>
+                <ul class="pagination text-center">
+                    <% if (current == 1) { %>
+                        <li class="disabled"><a>First</a></li>
+                    <% } else { %>
+                        <li><a href="/cars/1">First</a></li>
+                    <% } %>
+                    <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                    <% if (i !== 1) { %>
+                        <li class="disabled"><a>...</a></li>
+                    <% } %>
+                    <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+                        <% if (i == current) { %>
+                            <li class="active"><a><%= i %></a></li>
+                        <% } else { %>
+                            <li><a href="/cars/<%= i %>"><%= i %></a></li>
+                        <% } %>
+                        <% if (i == Number(current) + 4 && i < pages) { %>
+                            <li class="disabled"><a>...</a></li>
+                        <% } %>
+                    <% } %>
+                    <% if (current == pages) { %>
+                        <li class="disabled"><a>Last</a></li>
+                    <% } else { %>
+                        <li><a href="/cars/<%= pages %>">Last</a></li>
+                    <% } %>
+                </ul>
+            <% } %>
+    </div>
+</body>
+</html>
