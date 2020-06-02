@@ -8,25 +8,7 @@ const path= require('path')
 
 let arr=[]
 
-// root routes /cars
 
-router.get('/',function(req,res){
-    db.Car.find({}, function(error, allCars){
-        if(error){
-            console.log(error);
-        } else {
-          const sort =(require('../middlewere/sorth.js'))  
-          sort(allCars,req.query.sortby)
-          
-            
-            const context = {cars: allCars, user: req.session, page:req.query.page};
-          res.render('car/index', context);
-        }
-    });
-    
-
-});
-    
 
 
 
@@ -87,7 +69,7 @@ let secondid = Number(Date.now())
 });
 
 // show route
-router.get('/:id', function(req,res){
+router.get('/:id/new', function(req,res){
     db.Car.findById(req.params.id, function(error, foundCar){
         if(error){
             console.log(error);
@@ -150,7 +132,23 @@ router.delete('/:id',function(req,res){
     });
 
 
-   
+   // root routes /cars
+
+router.get('/:page',function(req,res){
+    db.Car.find({}, function(error, allCars){
+        if(error){
+            console.log(error);
+        } else {
+          const sort =(require('../middlewere/sorth.js'))  
+          sort(allCars,req.query.sortby)          
+            const context = {cars: allCars, user: req.session, page:req.params.page, sort:req.query.sortby};
+          res.render('car/index', context);
+        }
+    });
+    
+
+});
+    
       
         
  

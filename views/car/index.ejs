@@ -10,10 +10,12 @@
 
   <title>Home Page</title>
 </head>
+<%  page= Number(page);  %>
+
 <body>
   <header>
     <nav>
-        <a href="/cars?page=1">
+        <a href="/cars/1">
        <img src="/images/carlogo.png" alt="car logo" class="image"> 
      </a>
        <div class="right-menu">
@@ -40,7 +42,7 @@
  <section class="advertise">
 
  </section>
- <form action="/cars" method="get">
+ <form action="/cars/<%=page%>" method="get">
 <select id="sortby" name="sortby">
   <option value="price">Price</option>
   <option value="mil">Miles</option>
@@ -49,26 +51,28 @@
   <button type="submit">Submit</button>
 
  <div class = "container1">
-  <%  page= Number(page);  %>
   <nav aria-label="..." name='nav'>
     <ul class="pagination pagination-lg" name='ul'>
       <li class="page-item " name='page'> 
       
           <a class="page-link"  
           <%if(page-1!=0){%>
-          href="?page=<%=page-1%>"  
+          href="/cars/<%=page-1%>"  
           <%} %>
           >Previus</a>    
       </li>
       <li class="page-item " name='page'> 
        
-          <a class="page-link" href="?page=<%=page%>"  ><%=page%></a>    
+          <a class="page-link" href="/cars/<%=page%>"  ><%=page%></a>    
              
       </li>
       <li class="page-item " name='page'> 
           <a class="page-link" 
           <%if(page<=(cars.length/3)){%>
-            href="?page=<%=page+1%>"  
+           <% if(sort){ %>
+             href="/cars/<%=page+1%>?sortby=<%=sort%>" 
+           <%}%>
+            href="/cars/<%=page+1%>"  
             <%} %>
           >Next</a>    
              
@@ -81,7 +85,7 @@
       <img src="<%=cars[i].img[0]%>"  height="150px" width="150px" alt="" srcset="">
       <%= cars[i].secondid.length %>
       <div class="name">
-      <a href="/cars/<%= cars[i]._id %>"><%= cars[i].name %> </a>
+      <a href="/cars/<%= cars[i]._id %>/new"><%= cars[i].name %> </a>
       </div>  
       <div class='text'>
       Price: <%= cars[i].price %>
