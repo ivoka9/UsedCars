@@ -11,10 +11,14 @@ let arr=[]
 // root routes /cars
 
 router.get('/',function(req,res){
+    
     db.Car.find({}, function(error, allCars){
         if(error){
             console.log(error);
         } else {
+          const sort =(require('../middlewere/sorth.js'))  
+          sort(allCars,req.query.sortby)
+          
             
             const context = {cars: allCars, user: req.session};
           res.render('car/index', context);
@@ -179,8 +183,8 @@ router.delete('/:id',function(req,res){
     });
 
 
-router.get('/carprofile/:carid')    
-       
+   
+      
         
  
 module.exports = router;

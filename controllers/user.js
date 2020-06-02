@@ -60,7 +60,7 @@ router.post('/create', async (req,res)=>{
             
         }
         const newUser = await db.User.create(creatingUser)
-        res.redirect('/')
+        res.redirect('/cars')
     }
     catch(err){
         if(err){console.log(err)}
