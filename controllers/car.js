@@ -12,7 +12,7 @@ let arr=[]
 
 router.get('/',function(req,res){
    
-
+   
      db.Car.find({}, function(error, allCars){
         if(error){
             console.log(error);
