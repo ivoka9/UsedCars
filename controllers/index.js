@@ -1,4 +1,5 @@
 module.exports = {
     car : require('./car'),
-    user : require('./user')
+    user : require('./user'),
+    massage: require('./massage')
 };
