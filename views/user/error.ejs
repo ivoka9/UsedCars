@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles/main.css">
-    <title>Car Details Page</title>
+    <title>Document</title>
 </head>
 <body>
     <header>
@@ -31,29 +31,9 @@
                 </nav>
                 </header>
             <% }%>
-           
-    <section>
-        
-        </ul>
-        <h2>Car Details</h2>
-        <ul class="showpage">
-            <% for( let index = 0; index < car.img.length; index++ ) { %>
-                <img src="<%=car.img[index]%>" height="350px" width="400px" alt="">
-                <% } %>
-                <section class="list">
-            <p><li>Name: <%= car.name %>  </li></p>
-            <p><li>Price: <%= car.price %> </li></p>
-            <p><li>Year: <%= car.year %> </li></p>
-            <p><li>Mileage: <%= car.mileage %> </li></p>
-        </section>
-            <p><li>Description: <%= car.description %> </li></p>
-            <p><li><a href="/profile/<%= car.user %>">More listings from this user </a></li></p>
-        
-
-            
-        
-        <button>Message</button>
-    </ul>
-    </section>
+            <section class="error">
+    <h1>404 Error</h1>
+    <p>The requested URL was not found on this server</p>
+</section>
 </body>
 </html>

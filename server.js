@@ -25,10 +25,10 @@ app.use(session({
     saveUninitialized: false,
     cookie:{ maxAge: 1000*60*60*24*7},
 }))
-
+app.use('/cars',controllers.car);
 app.use('/',controllers.user)
 
-app.use('/cars',controllers.car);
+
 app.listen(PORT, function(){
     console.log(`Server is running on: ${PORT}`);
 });

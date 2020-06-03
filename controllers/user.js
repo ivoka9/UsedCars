@@ -60,11 +60,11 @@ router.post('/create', async (req,res)=>{
             
         }
         const newUser = await db.User.create(creatingUser)
-        res.redirect('/cars')
+        res.redirect('/cars/1')
     }
     catch(err){
         if(err){console.log(err)}
-        res.redirect('/cars')
+        res.redirect('/cars/1')
     }
 })
 
@@ -77,10 +77,13 @@ router.get('/login', (req,res)=>{
 
 router.post('/login', async (req,res)=>{
     try{
+
         loginFlag= false
         const foundUser = await db.User.findOne({Username: req.body.username})
         if(!foundUser){
                     loginFlag=true;
+                    
+
             return res.redirect('/login')}
         const pass =await  bcrypt.compare(req.body.password , foundUser.Password)
         if(!pass){
@@ -90,7 +93,7 @@ router.post('/login', async (req,res)=>{
             id : foundUser._id ,
             username: foundUser.Username
         }
-        res.redirect('/cars')
+        res.redirect('/profile')
     }
     catch(err){
         res.redirect('/login')
@@ -101,7 +104,7 @@ router.post('/login', async (req,res)=>{
 
 router.get('/logout' , async (req,res)=>{
     await req.session.destroy();
-    res.redirect('/cars')
+    res.redirect('/cars/1')
 })
 
 router.get('/profile/:id' , async (req,res)=>{
@@ -117,7 +120,7 @@ catch{
     flag = false
 }
 
-res.render("user/profile",{userProfile : userProfile, cars: foundCars, flag:flag,user: req.session}); 
+res.render("user/profile",{userProfile : userProfile, cars: foundCars, flag:flag,user: req.session,page: req.params.page}); 
 }   
 
 catch(err){
@@ -143,7 +146,7 @@ router.delete('/delacc/:id', async (req,res)=>{
                      
         }
         fs.rmdir(`./public/users/${deletedCar.secondid}`,function(){}) 
-        res.redirect('/cars')
+        res.redirect('/cars/1')
      }
     catch(err){
         res.json(err)

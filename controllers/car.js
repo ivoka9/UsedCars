@@ -9,7 +9,7 @@ const path= require('path')
 let arr=[]
 
 
-
+  // root routes /cars
 
 
 // new route //
@@ -56,9 +56,9 @@ let secondid = Number(Date.now())
             db.Car.create(newCar, async function(error, createdCar){
                 if(error){
                     console.log(error);
-                } else {
+                } else {    
                   
-                    res.redirect('/cars?page=1');
+                    res.redirect(`/profile/${createdCar.user}`);
                 }
             });
         }
@@ -132,7 +132,7 @@ router.delete('/:id',function(req,res){
     });
 
 
-   // root routes /cars
+ 
 
 router.get('/:page',function(req,res){
     db.Car.find({}, function(error, allCars){
