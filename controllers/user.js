@@ -109,18 +109,30 @@ router.get('/logout' , async (req,res)=>{
 
 router.get('/profile/:id' , async (req,res)=>{
 try{
-    
+    let chaturl=[]
+    let who=[]
 const userProfile = await db.User.findById(req.params.id)
+const chat = await db.Massage.find({reciver:userProfile.Username })
 const foundCars = await db.Car.find({user: req.params.id})
 try{
+   
   flag =(req.session.currentUser.username==userProfile.Username);
+  try{
+  for(let i=0 ; i<chat.length ; i++){
+   chaturl.push(`/massage/${chat[i].sender}/${userProfile._id}`)
+   who.push(chat[i].sender) 
+  }
+    }catch{}  
 }
 catch{
-    console.log('need')
     flag = false
 }
-
-res.render("user/profile",{userProfile : userProfile, cars: foundCars, flag:flag,user: req.session,page: req.params.page}); 
+console.log(chaturl)
+res.render("user/profile",{userProfile : userProfile, 
+                             cars: foundCars,
+                             flag:flag,user: req.session,
+                            chat :chaturl,
+                            who:who }); 
 }   
 
 catch(err){
@@ -153,6 +165,8 @@ router.delete('/delacc/:id', async (req,res)=>{
         console.log(err)
     }
 })
+
+
 
 
 module.exports= router

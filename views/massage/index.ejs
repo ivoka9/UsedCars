@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/chat.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="chat">
+        <h2>Chat </h2>
+        <textarea name="" id="mainchat" cols="70" rows="30" readonly>
+            <% let x=0,y=0 %>
+            <% for( let index = 0; index < context.story.length; index++ ) { %>
+               <%if(context.senderDate[x] > context.reciverDate[y] ) { %>
+                <% if(y+1>context.senderMsg.length){ %><%=context.sender%>: <%= context.senderMsg[x]  %><% x++ %><%}else{ %><%=context.reciver%>: <%= context.reciverMsg[y] %><% y++; } %> <% }else{  %>
+               <% if(x+1>context.senderMsg.length){ %>   <%=context.reciver%>: <%=context.reciverMsg[y] %>  <% y++ %> <%}else{ %> <%=context.sender%>: <%= context.senderMsg[x] %> <% x++; } %> <% }%>      <%}  %> 
+    </textarea>
+    
+    </div>
+<% if(user.currentUser.username == context.sender){ %>
+    <div class="sender chats">
+    <form action="/massage/send/sender" method="POST">  
+        Reciver: <input type="text" readonly name="reciver" value="sending to :<%=context.reciver%>"> 
+    <textarea class='text' name="text" id="" cols="20" rows="3"></textarea>
+    <button type="submit">Send Text</button>
+    </form>
+    </div>
+<% } else if(user.currentUser.username == context.reciver){%>
+    <div class="reciver chats">
+    <form action="/massage/send/res" method="POST" >
+        Sender: <input type="text" readonly name="sender" value="sending to : <%=context.sender%>"> 
+    <textarea class='text' name="text" id="" cols="30" rows="10"></textarea>
+    <button type="submit">Send Text</button>
+    </form>
+    <div>
+<% }%>
+
+</body>
+</html>
