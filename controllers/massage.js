@@ -38,7 +38,7 @@ router.post('/send/:who', async (req,res)=>{
     })
 
     const user = await db.User.find({Username:req.body.reciver})
-    console.log(user[0]._id)
+  
           
 
     res.redirect(`/massage/${req.body.sender}/${user[0]._id}`)})
@@ -47,12 +47,20 @@ router.get('/:send/:rec', async (req,res)=>{
   let rec =  await db.User.findById(req.params.rec)
     let context = {
         sender : req.params.send,
-        reciver : rec.Username
+        reciver : rec.Username,
+       chat : {
+           story: [1]
+       }
     }
     const sendAndRes= context.sender+context.reciver
     const chat =  await db.Massage.find({senderAndReciver: sendAndRes})
-    context.chat=chat[0]
-    //console.log(context.chat.story)
+   
+    try{
+        if(chat[0].story){}
+        
+        context=chat[0]
+    }
+    catch{context.story =5}
     res.render('massage/index' , context)
 })
 

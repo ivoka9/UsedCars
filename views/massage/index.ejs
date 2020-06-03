@@ -22,18 +22,28 @@
     <textarea name="text" id="" cols="30" rows="10"></textarea>
     <button type="submit">Send Text</button>
     </form>
-    <h2>Current CHat</h2>
-    <textarea name="" id="" cols="30" rows="10" text="123" readonly>
+    <h2>Current </h2>
+    <textarea name="" id="" cols="30" rows="10" readonly>
         <% let x=0,y=0 %>
-    <% for( let index = 0; index < chat.story.length; index++ ) { %>
-        <%if(chat.senderDate[x] < chat.reciverDate[y]) { %>
-            <%= chat.senderMsg[x] %>
-            <% x++ %>
-    <% }else{ %>
-        <%= chat.reciverMsg[y] %>
-        <% y++ %>
-        <% }%>
-    <% }%>
+        <% for( let index = 0; index < story.length; index++ ) { %>
+           <%if(senderDate[x] > reciverDate[y] ) { %>
+            <% if(y+1>senderMsg.length){ %>
+                <%= senderMsg[x]  %>
+                <% x++ %>
+            <%}else{ %>
+                <%= reciverMsg[y] %>
+                 <% y++; } %>
+                
+        <% }else{  %>
+           <% if(x+1>senderMsg.length){ %>
+                <%= reciverMsg[y] %>
+                <% y++ %>
+           <%}else{ %>
+            <%= senderMsg[x] %>
+            <% x++; } %>
+              
+            <% }%> 
+    <%}  %> 
 </textarea>
 </body>
 </html>
