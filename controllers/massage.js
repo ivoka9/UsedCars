@@ -65,7 +65,6 @@ router.get('/:send/:rec', async (req,res)=>{
         context : context,
         user : req.session
     }
-    console.log(main.user.currentUser.username)
     res.render('massage/index' , main)
 })
 
