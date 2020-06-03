@@ -1,0 +1,17 @@
+
+
+.chats{
+    position: absolute;
+    right: 20px;
+    bottom: 40px;
+}
+
+#mainchat{
+    color:white ;
+    background: rgb(0, 132, 255);
+}
+
+body{
+    background-color: grey;
+}
+

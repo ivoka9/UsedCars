@@ -71,5 +71,9 @@
         </form>
           <% } %> 
         </section>
+        <% for( let index = 0; index < chat.length; index++ ) { %>
+            <p></p>
+            <a href="<%=chat[index]%>">Chat with <%=who[index]%> </a>
+        <% } %>
 </body>
 </html>

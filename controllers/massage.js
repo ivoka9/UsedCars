@@ -61,7 +61,12 @@ router.get('/:send/:rec', async (req,res)=>{
         context=chat[0]
     }
     catch{context.story =5}
-    res.render('massage/index' , context)
+    let main= {
+        context : context,
+        user : req.session
+    }
+    console.log(main.user.currentUser.username)
+    res.render('massage/index' , main)
 })
 
 
