@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Working</h1>
+    <h1>Sender</h1>
+        
+    <form action="/massage/send/sender" method="POST">  
+        Sender: <input type="text" readonly name="sender" value="<%=sender%>"> 
+        Reciver: <input type="text" readonly name="reciver" value="<%=reciver%>"> 
+    <textarea name="text" id="" cols="30" rows="10"></textarea>
+    <button type="submit">Send Text</button>
+    </form>
+    <h1>REC</h1>
+    <form action="/massage/send/res" method="POST">
+        Sender: <input type="text" readonly name="sender" value="<%=sender%>"> 
+        Reciver: <input type="text" readonly name="reciver" value="<%=reciver%>"> 
+    <textarea name="text" id="" cols="30" rows="10"></textarea>
+    <button type="submit">Send Text</button>
+    </form>
+    <h2>Current CHat</h2>
+    <textarea name="" id="" cols="30" rows="10" text="123" readonly>
+        <% let x=0,y=0 %>
+    <% for( let index = 0; index < chat.story.length; index++ ) { %>
+        <%if(chat.senderDate[x] < chat.reciverDate[y]) { %>
+            <%= chat.senderMsg[x] %>
+            <% x++ %>
+    <% }else{ %>
+        <%= chat.reciverMsg[y] %>
+        <% y++ %>
+        <% }%>
+    <% }%>
+</textarea>
+</body>
+</html>

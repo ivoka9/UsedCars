@@ -27,7 +27,7 @@ app.use(session({
 }))
 
 app.use('/',controllers.user)
-
+app.use('/massage',controllers.massage)
 app.use('/cars',controllers.car);
 app.listen(PORT, function(){
     console.log(`Server is running on: ${PORT}`);
