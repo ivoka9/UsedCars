@@ -93,7 +93,7 @@ router.post('/login', async (req,res)=>{
             id : foundUser._id ,
             username: foundUser.Username
         }
-        res.redirect('/profile')
+        res.redirect(`/profile/${foundUser._id}`);
     }
     catch(err){
         res.redirect('/login')
