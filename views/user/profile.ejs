@@ -71,14 +71,7 @@
 
         </div>
     </section>
-    <section class="addcar">
-    <%if(flag){%>  
-        <a href="/cars/new" >Add New car</a>
-        <form action="/delacc/<%=userProfile.id%>?_method=Delete" method="post">
-            <input type="submit" value="Delacc" class="delete" >
-        </form>
-          <% } %> 
-        </section>
+  
         <% for( let index = 0; index < chat.length; index++ ) { %>
             <p></p>
             <a href="<%=chat[index]%>">Chat with <%=who[index]%> </a>
