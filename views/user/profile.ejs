@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  
     <title>Document</title>
 </head>
 <body>
@@ -15,9 +17,11 @@
            <div class="right-menu">
             <% console.log(user.currentUser)%>
             <% if (user.currentUser) { %>
-             
+                
                 <a href="/logout">Logout</a> 
-            
+                <form action="/delacc/<%=userProfile.id%>?_method=Delete" method="post">
+                    <button type="submit" class="delete" >Delete Account</button>
+                </form>
           </nav>
         </header>
              
@@ -40,17 +44,23 @@
   
     <section>
         <h2>Cars</h2>
+        <section class="addcar">
+            <%if(flag){%>  
+                <a href="/cars/new" id="add">Add New car</a>
+               
+                  <% } %> 
+                </section>
         <div class="profileshow">
         <%cars.forEach(car => { %>
             <div class="car">
             <img src="<%=car.img[0]%>"  width="200px" height="200px">
        
-            <p><a href="/cars/<%= car._id %>"><%= car.name %> </a></p>
+            <p><a href="/cars/<%= car._id %>/new"><%= car.name %> </a></p>
              <p>Price: <%= car.price %> </p>   
            
            
             <% if(flag){ %>
-                <a href="/cars/<%= car._id %>/edit">Edit</a>
+                <a href="/cars/<%= car._id %>/edit" id="edit">Edit</a>
                 <p>
                 <form action="/cars/<%= car._id %>?_method=DELETE" method="POST">
                 <input type="submit" value="Delete">
@@ -63,13 +73,8 @@
 
         </div>
     </section>
-    <section class="addcar">
-    <%if(flag){%>  
-        <a href="/cars/new" >Add New car</a>
-        <form action="/delacc/<%=userProfile.id%>?_method=Delete" method="post">
-            <input type="submit" value="Delacc" class="delete" >
-        </form>
-          <% } %> 
-        </section>
+    
+        
+     
 </body>
 </html>

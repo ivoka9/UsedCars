@@ -42,45 +42,18 @@
  <section class="advertise">
 
  </section>
+ <div class="sort">
  <form action="/cars/<%=page%>" method="get">
-<select id="sortby" name="sortby">
+<select id="sortby" name="sortby" >
   <option value="price">Price</option>
   <option value="mil">Miles</option>
   <option value="year">Year</option>
   </select>
-  <button type="submit">Submit</button>
-
+  <button type="submit" id="submit">Submit</button>
+</div>
  <div class = "container1">
-  <nav aria-label="..." name='nav'>
-    <ul class="pagination pagination-lg" name='ul'>
-      <li class="page-item " name='page'> 
-      
-          <a class="page-link"  
-          <%if(page-1!=0){%>
-          href="/cars/<%=page-1%>"  
-          <%} %>
-          >Previous</a>    
-      </li>
-      <li class="page-item " name='page'> 
-       
-          <a class="page-link" href="/cars/<%=page%>"  ><%=page%></a>    
-             
-      </li>
-      <li class="page-item " name='page'> 
-          <a class="page-link" 
-          <%if(page<=(cars.length/3)){%>
-           <% if(sort){ %>
-             href="/cars/<%=page+1%>?sortby=<%=sort%>" 
-           <%}%>
-            href="/cars/<%=page+1%>"  
-            <%} %>
-          >Next</a>    
-             
-      </li>
-    </ul>
-  </nav>
- 
-   <% for( let i =0+((3*page)-3) ; i < cars.length && i < 3*(page) ; i++) { %>
+  
+   <% for( let i =0+((4*page)-4) ; i < cars.length && i < 4*(page) ; i++) { %>
     <div class="car">
       <img src="<%=cars[i].img[0]%>"  height="150px" width="150px" alt="" srcset="">
       <%= cars[i].secondid.length %>
@@ -92,6 +65,36 @@
       </div>  
     </div>
       <% } %>
+      <div class="page">
+      <nav aria-label="..." name='nav'>
+        <ul class="pagination pagination-sm" name='ul'>
+          <li class="page-item " name='page'> 
+          
+              <a class="page-link"  
+              <%if(page-1!=0){%>
+              href="/cars/<%=page-1%>"  
+              <%} %>
+              >Previous</a>    
+          </li>
+          <li class="page-item " name='page'> 
+           
+              <a class="page-link" href="/cars/<%=page%>"  ><%=page%></a>    
+                 
+          </li>
+          <li class="page-item " name='page'> 
+              <a class="page-link" 
+              <%if(page<(cars.length/4)){%>
+               <% if(sort){ %>
+                 href="/cars/<%=page+1%>?sortby=<%=sort%>" 
+               <%}%>
+                href="/cars/<%=page+1%>"  
+                <%} %>
+              >Next</a>    
+                 
+          </li>
+        </ul>
+      </nav>
+    </div>
 </div>
 <footer class = "footer">
 
