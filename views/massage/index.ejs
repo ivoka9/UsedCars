@@ -21,7 +21,8 @@
 <% if(user.currentUser.username == context.sender){ %>
     <div class="sender chats">
     <form action="/massage/send/sender" method="POST">  
-        Reciver: <input type="text" readonly name="reciver" value="sending to :<%=context.reciver%>"> 
+        Seller: <input type="text" readonly name="reciver"  value='<%=context.reciver%>'>
+        Buyer: <input type="text" readonly name="sender"  value='<%=context.sender%>'>  
     <textarea class='text' name="text" id="" cols="20" rows="3"></textarea>
     <button type="submit">Send Text</button>
     </form>
@@ -29,7 +30,9 @@
 <% } else if(user.currentUser.username == context.reciver){%>
     <div class="reciver chats">
     <form action="/massage/send/res" method="POST" >
-        Sender: <input type="text" readonly name="sender" value="sending to : <%=context.sender%>"> 
+        Buyer: <input type="text" readonly name="sender"  value='<%=context.sender%>'> 
+        Seller: <input type="text" readonly name="reciver" value="<%=context.reciver%>">
+
     <textarea class='text' name="text" id="" cols="30" rows="10"></textarea>
     <button type="submit">Send Text</button>
     </form>
