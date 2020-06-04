@@ -26,9 +26,6 @@ let secondid = Number(Date.now())
     const storage = multer.diskStorage({
         destination: `./public/users/${req.params.id}/${secondid}`  ,
         filename: function(req,file,cb){
-<<<<<<< HEAD
-            if(path.extname(file.originalname)!='jpg'){res.redirect('/user/error')}
-=======
             if(path.extname(file.originalname) == ".png"|| path.extname(file.originalname) == ".jpg"
             || path.extname(file.originalname) == ".jpeg")
             {}
@@ -36,21 +33,11 @@ let secondid = Number(Date.now())
                     return res.redirect("/user/error");
             }
             
->>>>>>> 0f59a198cf03093e848a5b57d6a3322fc966f85b
             cb(null, file.fieldname+'-'+Date.now()+path.extname(
                 file.originalname
             ));
         }
     })
-<<<<<<< HEAD
-    if(stopFlag){  console.log('err')}
-    const upload = multer({
-        storage:storage
-    }).array('imgName' ,5)
-
-    upload(req, res, (err)=>{
-        if(err){res.redirect('user/error')}
-=======
     
 
     
@@ -66,7 +53,6 @@ let secondid = Number(Date.now())
             console.log(err)
             res.redirect('/user/error');
         }
->>>>>>> 0f59a198cf03093e848a5b57d6a3322fc966f85b
         else{
             arr=[]
          for(let i=0 ; i< req.files.length ; i++ ){
