@@ -19,7 +19,9 @@
             <% if (user.currentUser) { %>
                 
                 <a href="/logout">Logout</a> 
-              
+                <form action="/delacc/<%=userProfile.id%>?_method=Delete" method="post">
+                    <button type="submit" class="delete" >Delete Account</button>
+                </form>
           </nav>
         </header>
              
@@ -38,7 +40,10 @@
         <section class="addcar">
             <%if(flag){%>  
                 <a href="/cars/new" id="add">Add New car</a>
-               
+                <% for( let index = 0; index < chat.length; index++ ) { %>
+                    <p></p>
+                    <a href="<%=chat[index]%>">Chat with <%=who[index]%> </a>
+                <% } %>
                   <% } %> 
                 </section>
         <div class="profileshow">
@@ -64,6 +69,7 @@
 
         </div>
     </section>
+<<<<<<< HEAD
     <section class="addcar">
     <%if(flag){%>  
         <a href="/cars/new" >Add New car</a>
@@ -76,5 +82,9 @@
             <p></p>
             <a href="<%=chat[index]%>">Chat with <%=who[index]%> </a>
         <% } %>
+=======
+  
+        
+>>>>>>> 0f59a198cf03093e848a5b57d6a3322fc966f85b
 </body>
 </html>

@@ -166,10 +166,16 @@ router.delete('/delacc/:id', async (req,res)=>{
     }
 })
 
+<<<<<<< HEAD
 router.get('/*',(req,res)=>{
     res.render('user/error')
 })
 
+=======
+router.get('/*', function(req,res){
+    res.render('user/error',{user: req.session});
+})
+>>>>>>> 0f59a198cf03093e848a5b57d6a3322fc966f85b
 
 
 module.exports= router

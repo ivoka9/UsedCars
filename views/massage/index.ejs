@@ -3,13 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/main.css">
     <link rel="stylesheet" href="/styles/chat.css">
     <title>Document</title>
 </head>
 <body>
+    <header>
+        <nav>
+            <a href="/cars/1">
+           <img src="/images/carlogo.png" alt="car logo" class="image"> 
+         </a>
+           <div class="right-menu">
+            <% if (user.currentUser) { %>
+              <a href="/profile/<%=user.currentUser.id%>" class="profile">Profile</a>
+             
+            <a href="/logout">Logout</a> 
+             </form>
+             
+          </nav>
+        </header>
+             
+            <% }  else { %>
+              
+                   
+                       <a href="/login">Login</a>
+                       <a href="/create">Register</a>
+                       
+            </div> 
+                </nav>
+                </header>
+            <% }%>
+             
     <div class="chat">
         <h2>Chat </h2>
+<<<<<<< HEAD
         <div name="" id="mainchat" >
+=======
+        <textarea name="" id="mainchat" cols="70" rows="20" readonly>
+>>>>>>> 0f59a198cf03093e848a5b57d6a3322fc966f85b
             <% let x=0,y=0 %>
             <% for( let index = 0; index < context.story.length; index++ ) { %>
                <%if(context.senderDate[x] > context.reciverDate[y] ) { %>
@@ -24,7 +55,7 @@
         Seller: <input type="text" readonly name="reciver"  value='<%=context.reciver%>'>
         Buyer: <input type="text" readonly name="sender"  value='<%=context.sender%>'>  
     <textarea class='text' name="text" id="" cols="20" rows="3"></textarea>
-    <button type="submit">Send Text</button>
+    <button type="submit"class="submit" >Send Text</button>
     </form>
     </div>
 <% } else if(user.currentUser.username == context.reciver){%>
@@ -34,7 +65,7 @@
         Seller: <input type="text" readonly name="reciver" value="<%=context.reciver%>">
 
     <textarea class='text' name="text" id="" cols="30" rows="10"></textarea>
-    <button type="submit">Send Text</button>
+    <button type="submit" class="submit">Send Text</button>
     </form>
     <div>
 <% }%>

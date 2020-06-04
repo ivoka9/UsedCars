@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles/main.css">
+    <script
+    src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+    crossorigin="anonymous" defer></script>
+    <script src="/scripts/app.js" defer></script>
+ 
+
     <title>Car Details Page</title>
 </head>
 <body>
@@ -36,23 +43,45 @@
         
         </ul>
         <h2>Car Details</h2>
-        <ul class="showpage">
+        <div class="thumbnail">
+        <img src="<%= car.img[0] %> " height="450px" width="500px" id="first">
+        
+            <div class="smallthumb">
+                
+                <% if(car.img.length !== 1) {%> 
             <% for( let index = 0; index < car.img.length; index++ ) { %>
-                <img src="<%=car.img[index]%>" height="350px" width="400px" alt="">
+                <img src="<%=car.img[index]%>" height="100px" width="100px" class="small">
                 <% } %>
+                <% } %>
+            </div>
+            </div>
+            <ul>
                 <section class="list">
             <p><li>Name: <%= car.name %>  </li></p>
             <p><li>Price: <%= car.price %> </li></p>
             <p><li>Year: <%= car.year %> </li></p>
             <p><li>Mileage: <%= car.mileage %> </li></p>
-        </section>
-            <p><li>Description: <%= car.description %> </li></p>
+       
+            
             <p><li><a href="/profile/<%= car.user %>">More listings from this user </a></li></p>
         
-
+       
             
-        </ul>
-        <a href="/massage/<%=user.currentUser.username%>/<%=car.user%>">Massage</a>
+       
+       
+        <% if (user.currentUser) { %>
+        <a href="/massage/<%=user.currentUser.username%>/<%=car.user%>">Message</a>
+        <% } %>
+        <% if(!user.currentUser) { %>
+            Sign up to contact seller
+        <% } %> 
+    </ul>
+    <div class="desc">
+    <p><li>Description: <%= car.description %> </li></p>
+    </div>
+    </section>
+    
+       
     </section>
 </body>
 </html>

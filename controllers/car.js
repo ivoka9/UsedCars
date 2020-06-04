@@ -26,12 +26,23 @@ let secondid = Number(Date.now())
     const storage = multer.diskStorage({
         destination: `./public/users/${req.params.id}/${secondid}`  ,
         filename: function(req,file,cb){
+<<<<<<< HEAD
             if(path.extname(file.originalname)!='jpg'){res.redirect('/user/error')}
+=======
+            if(path.extname(file.originalname) == ".png"|| path.extname(file.originalname) == ".jpg"
+            || path.extname(file.originalname) == ".jpeg")
+            {}
+            else {
+                    return res.redirect("/user/error");
+            }
+            
+>>>>>>> 0f59a198cf03093e848a5b57d6a3322fc966f85b
             cb(null, file.fieldname+'-'+Date.now()+path.extname(
                 file.originalname
             ));
         }
     })
+<<<<<<< HEAD
     if(stopFlag){  console.log('err')}
     const upload = multer({
         storage:storage
@@ -39,13 +50,31 @@ let secondid = Number(Date.now())
 
     upload(req, res, (err)=>{
         if(err){res.redirect('user/error')}
+=======
+    
+
+    
+    const upload = multer({
+        storage:storage
+    }).array('imgName' ,5)
+    
+   
+   
+    upload(req, res, (err)=>{
+        if(err)
+        {
+            console.log(err)
+            res.redirect('/user/error');
+        }
+>>>>>>> 0f59a198cf03093e848a5b57d6a3322fc966f85b
         else{
             arr=[]
          for(let i=0 ; i< req.files.length ; i++ ){
              const img =req.files[i].path.replace("public",'')
              arr.push(img)
          }
-
+        
+      
             const newCar = {
                 name : req.body.name ,
                 price : req.body.price ,
@@ -138,17 +167,33 @@ router.delete('/:id',function(req,res){
  
 
 router.get('/:page',function(req,res){
-    db.Car.find({}, function(error, allCars){
-        if(error){
-            console.log(error);
-        } else {
-          const sort =(require('../middlewere/sorth.js'))  
-          sort(allCars,req.query.sortby)          
-            const context = {cars: allCars, user: req.session, page:req.params.page, sort:req.query.sortby};
-          res.render('car/index', context);
-        }
-    });
-    
+    if(req.query.search){
+        db.Car.find({name: req.query.search}, function(error,foundSearch){
+            if(error){
+                console.log(error);
+            } else {
+                    
+            const context = {cars: foundSearch, user: req.session, page:req.params.page};
+            
+             return res.render('car/index', context);
+            }
+        })
+    }
+    else {
+        db.Car.find({}, function(error, allCars){
+            if(error){
+                console.log(error);
+            } else {
+              const sort =(require('../middlewere/sorth.js'))  
+              sort(allCars,req.query.sortby)          
+                const context = {cars: allCars, user: req.session, page:req.params.page, sort:req.query.sortby};
+              res.render('car/index', context);
+            }
+        });
+        
+
+    }
+   
 
 });
     
