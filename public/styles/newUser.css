@@ -26,7 +26,7 @@ background-color: whitesmoke;
 
 input,label{
     font-size: 20px;
-    border-radius: 10%;
+    border-radius: 4px;
     margin: 50px ;
     display:  block;
     
@@ -41,11 +41,27 @@ button{
     padding: 4px;
     border-radius: 4px;
     font-size: 20px;
-    margin: 50px auto ;
+    margin: 50px 60px;
     display:  block;
+    cursor: pointer;
+    border: 1px solid black;
+
 }
 
 p{
     font-size: 20px;
     color : red; 
+}
+
+.loginlink {
+    text-decoration: none;
+    font-size: 20px;
+    color: black;
+    border: 1px solid black;
+    border-radius: 4px;
+    position: absolute;
+    right: 50px;
+    bottom: 50px;
+    padding: 5px;
+    background-color: whitesmoke;
 }
