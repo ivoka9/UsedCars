@@ -21,21 +21,24 @@ router.get('/new', async function(req,res,next){
  
 // create route
 router.post('/:id', function(req,res){
+    let stopFlag= false;
 let secondid = Number(Date.now())
     const storage = multer.diskStorage({
         destination: `./public/users/${req.params.id}/${secondid}`  ,
         filename: function(req,file,cb){
+            if(path.extname(file.originalname)!='jpg'){res.redirect('/user/error')}
             cb(null, file.fieldname+'-'+Date.now()+path.extname(
                 file.originalname
             ));
         }
     })
+    if(stopFlag){  console.log('err')}
     const upload = multer({
         storage:storage
-    }).array('imgName' ,10)
+    }).array('imgName' ,5)
 
     upload(req, res, (err)=>{
-        if(err){console.log(err)}
+        if(err){res.redirect('user/error')}
         else{
             arr=[]
          for(let i=0 ; i< req.files.length ; i++ ){
@@ -57,7 +60,7 @@ let secondid = Number(Date.now())
                 if(error){
                     console.log(error);
                 } else {    
-                  
+                
                     res.redirect(`/profile/${createdCar.user}`);
                 }
             });

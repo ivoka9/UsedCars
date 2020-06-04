@@ -9,13 +9,13 @@
 <body>
     <div class="chat">
         <h2>Chat </h2>
-        <textarea name="" id="mainchat" cols="70" rows="30" readonly>
+        <div name="" id="mainchat" >
             <% let x=0,y=0 %>
             <% for( let index = 0; index < context.story.length; index++ ) { %>
                <%if(context.senderDate[x] > context.reciverDate[y] ) { %>
                 <% if(y+1>context.senderMsg.length){ %><%=context.sender%>: <%= context.senderMsg[x]  %><% x++ %><%}else{ %><%=context.reciver%>: <%= context.reciverMsg[y] %><% y++; } %> <% }else{  %>
                <% if(x+1>context.senderMsg.length){ %>   <%=context.reciver%>: <%=context.reciverMsg[y] %>  <% y++ %> <%}else{ %> <%=context.sender%>: <%= context.senderMsg[x] %> <% x++; } %> <% }%>      <%}  %> 
-    </textarea>
+    </div>
     
     </div>
 <% if(user.currentUser.username == context.sender){ %>
