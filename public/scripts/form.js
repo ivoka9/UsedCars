@@ -84,8 +84,4 @@ function setup() {
     
   }
 
-  function mousePressed(){
-    
-}
-
 

@@ -127,7 +127,6 @@ try{
 catch{
     flag = false
 }
-console.log(chaturl)
 res.render("user/profile",{userProfile : userProfile, 
                              cars: foundCars,
                              flag:flag,user: req.session,
@@ -149,7 +148,6 @@ router.delete('/delacc/:id', async (req,res)=>{
         const delCars= await db.Car.find({user : req.params.id})
        
         for(let i=0 ; i<delCars.length; i++){
-            console.log(delCars[i]._id)
             deletedCar = await db.Car.findByIdAndDelete(delCars[i]._id)               
             for(let i=0 ; i<deletedCar.img.length ;i++) {
                 fs.unlink(`./public/${deletedCar.img[i][0]}`,function(){})

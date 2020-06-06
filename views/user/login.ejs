@@ -19,16 +19,19 @@
     <div class='background'></div>
 
 
-   <form action="/login" method="POST" id="formRegister">
+   <form action="/login" method="POST" id="form">
         <input type="text" id="username" maxlength="21" placeholder="Username" name='username'>
         <input type="password" placeholder="Password" id="password" maxlength="21" name='password'>
         <% if (loginFlag) { %>
          <p>Username or Password did not match</p>
         <% } %>
+       
+       <div id="control">
         <button type="submit">Log In</button>
-       
-       
+
         <a href="/create" class="loginlink">Register</a> 
+
+       </div>
         
  
 
