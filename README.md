@@ -25,6 +25,7 @@ Authenticated User can:
 * Edit posts for car they sell
 * Delete posts for car they sell
 * Chat with other user/buyer
+* Delete Account
 
 ## Wireframes
 
