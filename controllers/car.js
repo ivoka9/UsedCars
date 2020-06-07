@@ -15,7 +15,7 @@ let arr=[]
 // new route //
 router.get('/new', async function(req,res,next){
    const userid = autorization(req.session.currentUser,res,next)
-    res.render('car/new' ,{userid: userid, user: req.session});
+    res.render('car/new' ,{userid: userid, user: req.session,err:false});
 })
 
  
@@ -30,7 +30,8 @@ let secondid = Number(Date.now())
             || path.extname(file.originalname) == ".jpeg")
             {}
             else {
-                    return res.redirect("/user/error");
+                console.log("errorrr")
+                    return res.render("car/new",{userid: req.session.currentUser.id, user: req.session ,err:true});
             }
             
             cb(null, file.fieldname+'-'+Date.now()+path.extname(
@@ -50,8 +51,8 @@ let secondid = Number(Date.now())
     upload(req, res, (err)=>{
         if(err)
         {
-            console.log(err)
-            res.redirect('/user/error');
+            return res.render("car/new",{userid: req.session.currentUser.id, user: req.session ,err:true});
+
         }
         else{
             arr=[]

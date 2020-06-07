@@ -38,14 +38,14 @@
             <% }%>
   
     <section>
-       
+<%console.log(chat)%>
         <section class="addcar">
             <%if(flag){%>  
                 <a href="/cars/new" id="add">Add New Car</a>
+                <%let properChatNames=0%>
                 <% for( let index = 0; index < chat.length; index++ ) { %>
-                    <p></p>
-                    <a href="<%=chat[index]%>">Chat with <%=who[index]%> </a>
-                <% } %>
+                    <a class="chatwith" href="<%=chat[index]%>">Chat with <%=who[properChatNames]%> - <%=who[properChatNames+1]%> </a>
+                <% properChatNames+=2 } %>
                   <% } %> 
                 </section>
         <div class="container1">

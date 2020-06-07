@@ -124,10 +124,13 @@ try{
         
         chaturl.push(`/massage/${chat[i].story[2]}/${foundUser[0]._id}`)
         who.push(chat[i].story[0]) 
+        who.push("Seller") 
       }
       if(chat[i].story[0]==userProfile.Username  ){
    chaturl.push(`/massage/${chat[i].story[2]}/${userProfile._id}`)
    who.push(chat[i].story[2]) 
+   who.push("Buyer") 
+
       }
   }
     }catch{}  

@@ -318,3 +318,9 @@ h2{
     display: flex;
     flex-wrap: wrap;
 }
+
+
+.chatwith{
+    margin-left: 10px;
+    margin-right: 10px;
+}
