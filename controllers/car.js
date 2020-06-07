@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../models');
-const fs = require('fs')
-const autorization = require('../middlewere/auth.js')
-const multer = require('multer')
-const path= require('path')
+const fs = require('fs');
+const autorization = require('../middlewere/auth.js');
+
+// multer packages for Image Uplaod
+const multer = require('multer');
+const path= require('path');
 
 let arr=[]
 
@@ -39,14 +41,10 @@ let secondid = Number(Date.now())
         }
     })
     
-
-    
     const upload = multer({
         storage:storage
     }).array('imgName' ,5)
     
-   
-   
     upload(req, res, (err)=>{
         if(err)
         {
@@ -61,26 +59,25 @@ let secondid = Number(Date.now())
          }
         
       
-            const newCar = {
-                name : req.body.name ,
-                price : req.body.price ,
-                year : req.body.year,
-                mileage: req.body.mileage,
-                description: req.body.description,
-                user: req.params.id,
-                img : arr,
-                secondid: secondid
+    const newCar = {
+        name : req.body.name ,
+        price : req.body.price ,
+        year : req.body.year,
+        mileage: req.body.mileage,
+        description: req.body.description,
+        user: req.params.id,
+        img : arr,
+        secondid: secondid
             }
-            db.Car.create(newCar, async function(error, createdCar){
-                if(error){
-                    console.log(error);
-                } else {    
-                
-                    res.redirect(`/profile/${createdCar.user}`);
+    db.Car.create(newCar, async function(error, createdCar){
+        if(error){
+            console.log(error);
+        } else {    
+                res.redirect(`/profile/${createdCar.user}`);
                 }
-            });
+        });
         }
-    })
+    });
 
    
     
@@ -170,7 +167,7 @@ router.get('/:page',function(req,res){
             if(error){
                 console.log(error);
             } else {
-              const sort =(require('../middlewere/sorth.js'))  
+              const sort =(require('../middlewere/sort.js'))  
               sort(allCars,req.query.sortby)          
                 const context = {cars: allCars, user: req.session, page:req.params.page, sort:req.query.sortby};
               res.render('car/index', context);
