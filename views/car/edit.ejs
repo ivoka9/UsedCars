@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/addcar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+HK:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Document</title>
 </head>
 <body>
     <header>
         <nav>
             <a href="/cars/1">
-           <img src="/images/carlogo.png" alt="car logo" class="image"> 
+           <img src="/images/logo2.png" alt="car logo" class="image"> 
          </a>
            <div class="right-menu">
             <% if (user.currentUser) { %>
@@ -30,31 +33,50 @@
                 </nav>
                 </header>
             <% }%>
-            <h1 class="editform">Edit <%= car.name %> </h1>
-            <div class="contain">
-            <div class="formnew">
-        
+            
+<section>
+    <div class="new-form">
         <form action="/cars/<%= car._id %>?_method=PUT " method="post">
-            <p>
-                Name: <input type="text" name="name" value="<%= car.name %>" />
-             </p>
-             <p>
-               Price: <input type="number" name="price" value="<%= car.price %>" />
-             </p>
-             <p>
-                Year: <input type="number" min="1900" max="2020" name="year" value="<%= car.year %>" />
-             </p>
-             <p>
-                Mileage: <input type="number" name="mileage" value="<%= car.mileage %>" />
-             </p>
-             <p>
-                Description: <textarea name="description" placeholder="description" ></textarea>
-             </p>
-             <p>
-                 <input type="submit" value="Update" class="submit">
-             </p>
+            <div class="form-group row">
+                <label for="Name" class="col-sm-2 col-form-label">Name</label>
+                <div class="col-sm-10">
+                <input type="text" name="name" value="<%= car.name %>" class="form-control" id="Name" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="Price" class="col-sm-2 col-form-label">Price</label>
+                <div class="col-sm-10">
+             <input type="number" name="price" value="<%= car.price %>" class="form-control" id="Price" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="Year" class="col-sm-2 col-form-label">Year</label>
+                <div class="col-sm-10">
+              <input type="number" min="1900" max="2020" name="year" value="<%= car.year %>" class="form-control" id="Year" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="Mileage" class="col-sm-2 col-form-label">Miles</label>
+                <div class="col-sm-10">
+                <input type="number" name="mileage" value="<%= car.mileage %>" class="form-control" id="Mileage" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="desc" class="col-sm-2 col-form-label">Details</label>
+                <div class="col-sm-10">
+                <textarea name="description" placeholder="description" class="form-control" id="Desc" ></textarea>
+            </div>
+        </div>
+            <div class="form-group row">
+                <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary" id="addbutton">Update Car</button>
+                </div>
+            </div>
         </form>
     </div>
-</div>
+
+</section>
+
+
 </body>
 </html>

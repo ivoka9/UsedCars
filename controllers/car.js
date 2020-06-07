@@ -159,7 +159,7 @@ router.get('/:page',function(req,res){
                 console.log(error);
             } else {
                     
-            const context = {cars: foundSearch, user: req.session, page:req.params.page};
+            const context = {cars: foundSearch, user: req.session, page:req.params.page,sort: false};
             
              return res.render('car/index', context);
             }
