@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/nav.css">
     <link rel="stylesheet" href="/styles/main.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+HK:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   
     <title>Document</title>
@@ -12,7 +15,7 @@
     <header>
         <nav>
             <a href="/cars/1">
-           <img src="/images/carlogo.png" alt="car logo" class="image"> 
+           <img src="/images/logo2.png" alt="car logo" class="image"> 
          </a>
            <div class="right-menu">
             <% console.log(user.currentUser)%>
@@ -43,30 +46,38 @@
     
   
     <section>
-        <h2>Cars</h2>
+       
         <section class="addcar">
             <%if(flag){%>  
-                <a href="/cars/new" id="add">Add New car</a>
+                <a href="/cars/new" id="add">Add New Car</a>
                 <% for( let index = 0; index < chat.length; index++ ) { %>
                     <p></p>
                     <a href="<%=chat[index]%>">Chat with <%=who[index]%> </a>
                 <% } %>
                   <% } %> 
                 </section>
-        <div class="profileshow">
+        <div class="container1">
         <%cars.forEach(car => { %>
             <div class="car">
-            <img src="<%=car.img[0]%>"  width="200px" height="200px">
-       
-            <p><a href="/cars/<%= car._id %>/new"><%= car.name %> </a></p>
-             <p>Price: <%= car.price %> </p>   
-           
+                <a href="/cars/<%= car._id %>/new">
+            <img src="<%=car.img[0]%>"  width="200px" height="115px">
+        </a>
+            <div class="name">
+                 <%= car.name %> 
+            </div>
+            <div class='text'>
+             $<%= car.price %>  
+            </div>
            
             <% if(flag){ %>
-                <a href="/cars/<%= car._id %>/edit" id="edit">Edit</a>
-                <p>
+              
+                    <div class="edit">
+                        <a href="/cars/<%= car._id %>/edit" >Edit</a>
+                    </div>
+                
+               <p>
                 <form action="/cars/<%= car._id %>?_method=DELETE" method="POST">
-                <input type="submit" value="Delete">
+                <input type="submit" value="Delete" class="delete">
             </form>
         </p>
     
