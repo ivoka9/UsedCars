@@ -112,22 +112,29 @@ try{
     let chaturl=[]
     let who=[]
 const userProfile = await db.User.findById(req.params.id)
-const chat = await db.Massage.find({reciver:userProfile.Username })
+const chat = await db.Massage.find({story: userProfile.Username})
 const foundCars = await db.Car.find({user: req.params.id})
 try{
    
   flag =(req.session.currentUser.username==userProfile.Username);
   try{
   for(let i=0 ; i<chat.length ; i++){
-   chaturl.push(`/massage/${chat[i].sender}/${userProfile._id}`)
-   who.push(chat[i].sender) 
+      if(chat[i].story[2]==userProfile.Username){
+        const foundUser = await db.User.find({Username : chat[i].story[0]})
+        
+        chaturl.push(`/massage/${chat[i].story[2]}/${foundUser[0]._id}`)
+        who.push(chat[i].story[0]) 
+      }
+      if(chat[i].story[0]==userProfile.Username  ){
+   chaturl.push(`/massage/${chat[i].story[2]}/${userProfile._id}`)
+   who.push(chat[i].story[2]) 
+      }
   }
     }catch{}  
 }
 catch{
     flag = false
 }
-console.log(chaturl)
 res.render("user/profile",{userProfile : userProfile, 
                              cars: foundCars,
                              flag:flag,user: req.session,
@@ -149,7 +156,6 @@ router.delete('/delacc/:id', async (req,res)=>{
         const delCars= await db.Car.find({user : req.params.id})
        
         for(let i=0 ; i<delCars.length; i++){
-            console.log(delCars[i]._id)
             deletedCar = await db.Car.findByIdAndDelete(delCars[i]._id)               
             for(let i=0 ; i<deletedCar.img.length ;i++) {
                 fs.unlink(`./public/${deletedCar.img[i][0]}`,function(){})

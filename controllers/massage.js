@@ -4,68 +4,75 @@ const db= require('../models')
 
 
 router.post('/send/:who', async (req,res)=>{
-    let currentChat,sender=false, SendAndRes
+    let currentChat,buyer=false, SendAndRes
     
-    SendAndRes= (String(req.body.sender) + String(req.body.reciver))
+    SendAndRes= (String(req.body.buyer) + String(req.body.seller))
  
-    if(req.params.who=="sender"){sender=true}
+    if(req.params.who=="buyer"){buyer=true}
  
     const chat = {
-        sender : req.body.sender,
-        reciver: req.body.reciver,
-        senderDate: Number(Date.now()),
+        story : [req.body.seller, req.body.text,req.body.buyer,"buyer"] ,
         senderAndReciver :  SendAndRes,
-        senderMsg: req.body.text,
-        story: 1
     }
         db.Massage.create(chat,async (err,feedback)=>{
             
         if(err){
          currentChat = await db.Massage.find({senderAndReciver : chat.senderAndReciver})
-            if(sender){
-                currentChat[0].senderMsg.push(req.body.text)
-                currentChat[0].senderDate.push(Date.now())
+            if(buyer){
+               await currentChat[0].story.push(req.body.text)
+               await currentChat[0].story.push(req.body.buyer)
+               await currentChat[0].story.push("buyer")
+
              }
             else{
-                currentChat[0].reciverMsg.push(req.body.text)
-                currentChat[0].reciverDate.push(Date.now())
+                await currentChat[0].story.push(req.body.text)
+                await currentChat[0].story.push(req.body.seller)
+                await currentChat[0].story.push("seller")
+
             } 
-            currentChat[0].story.push(1)
+        
             currentChat[0].save()
             
          
         }
     })
 
-    const user = await db.User.find({Username:req.body.reciver})
+    const user = await db.User.find({Username:req.body.seller})
   
           
 
-    res.redirect(`/massage/${req.body.sender}/${user[0]._id}`)})
+    res.redirect(`/massage/${req.body.buyer}/${user[0]._id}`
+    )})
 
-router.get('/:send/:rec', async (req,res)=>{
-  let rec =  await db.User.findById(req.params.rec)
-    let context = {
-        sender : req.params.send,
-        reciver : rec.Username,
-       chat : {
-           story: [1]
-       }
-    }
-    const sendAndRes= context.sender+context.reciver
-    const chat =  await db.Massage.find({senderAndReciver: sendAndRes})
+
+
+
+
+
+
+
+
+
+
+router.get('/:buyer/:seller', async (req,res)=>{
+ let seller=  await db.User.findById(req.params.seller)
+ context= {
+    buyer : req.params.buyer ,
+    seller: seller.Username,
+    user: req.session,
    
-    try{
-        if(chat[0].story){}
-        
-        context=chat[0]
-    }
-    catch{context.story =5}
-    let main= {
-        context : context,
-        user : req.session
-    }
-    res.render('massage/index' , main)
+}
+
+ let chat = await db.Massage.find({senderAndReciver : req.params.buyer+seller.Username})
+ if(chat[0]){
+    context.story = chat[0].story
+ }
+
+else{
+context.story=1}
+
+
+    res.render('massage/index' ,  context )
 })
 
 

@@ -21,6 +21,7 @@ router.get('/new', async function(req,res,next){
  
 // create route
 router.post('/:id', function(req,res){
+    let stopFlag= false;
 let secondid = Number(Date.now())
     const storage = multer.diskStorage({
         destination: `./public/users/${req.params.id}/${secondid}`  ,
@@ -74,7 +75,7 @@ let secondid = Number(Date.now())
                 if(error){
                     console.log(error);
                 } else {    
-                  
+                
                     res.redirect(`/profile/${createdCar.user}`);
                 }
             });
