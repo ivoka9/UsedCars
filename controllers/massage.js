@@ -11,7 +11,7 @@ router.post('/send/:who', async (req,res)=>{
     if(req.params.who=="buyer"){buyer=true}
  
     const chat = {
-        story : [req.body.text,req.body.buyer,"buyer"] ,
+        story : [req.body.seller, req.body.text,req.body.buyer,"buyer"] ,
         senderAndReciver :  SendAndRes,
     }
         db.Massage.create(chat,async (err,feedback)=>{
@@ -57,7 +57,7 @@ router.post('/send/:who', async (req,res)=>{
 router.get('/:buyer/:seller', async (req,res)=>{
  let seller=  await db.User.findById(req.params.seller)
  context= {
-    buyer : req.session.currentUser.username  ,
+    buyer : req.params.buyer ,
     seller: seller.Username,
     user: req.session,
    

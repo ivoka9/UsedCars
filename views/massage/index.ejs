@@ -38,7 +38,7 @@
 <div class="chat" id='chat'>
     <h3>Massages</h3>
     <%if (story.length>1) {%>
-        <%for(let i=0 ; i<story.length; i+=3){%>
+        <%for(let i=1; i<story.length; i+=3){%>
             <div class="<%=story[i+2]%>" >
                 <p class="<%=story[i+2]%>name"><%=story[i+1]%> : </br> <%=story[i]%></p></div>
         <% } %>
@@ -50,7 +50,7 @@
 <div class="chatrooms" >
   
 
-<div class="buyerchat <%if(user.currentUser.username==buyer){%>
+<div class="buyerchat <%if(user.currentUser.username!=buyer){%>
     <%='hidden' %> <%}%>
     "  >
     <form action="/massage/send/buyer" method="POST" id="buyer">  
@@ -61,7 +61,7 @@
     <button type="submit"class="submit" id="buyersubmit" hidden>Send Text</button>
     </form>
     </div>
-  <div class="sellerchat"<%if(user.currentUser.username!=buyer){%>
+  <div class="sellerchat"<%if(user.currentUser.username==buyer){%>
     <%='hidden' %> <%}%>
     "  >  
         <form action="/massage/send/seller" method="POST">  

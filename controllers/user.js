@@ -112,15 +112,23 @@ try{
     let chaturl=[]
     let who=[]
 const userProfile = await db.User.findById(req.params.id)
-const chat = await db.Massage.find({reciver:userProfile.Username })
+const chat = await db.Massage.find({story: userProfile.Username})
 const foundCars = await db.Car.find({user: req.params.id})
 try{
    
   flag =(req.session.currentUser.username==userProfile.Username);
   try{
   for(let i=0 ; i<chat.length ; i++){
-   chaturl.push(`/massage/${chat[i].sender}/${userProfile._id}`)
-   who.push(chat[i].sender) 
+      if(chat[i].story[2]==userProfile.Username){
+        const foundUser = await db.User.find({Username : chat[i].story[0]})
+        
+        chaturl.push(`/massage/${chat[i].story[2]}/${foundUser[0]._id}`)
+        who.push(chat[i].story[0]) 
+      }
+      if(chat[i].story[0]==userProfile.Username  ){
+   chaturl.push(`/massage/${chat[i].story[2]}/${userProfile._id}`)
+   who.push(chat[i].story[2]) 
+      }
   }
     }catch{}  
 }
