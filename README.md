@@ -32,7 +32,7 @@ Authenticated User can:
 
 Users will see logo Login/Register Link and car images with name and price.
 
-![](Images/landing.png)
+<img src="Images/landing.png" width="300" height="200">
 
 ## Car Details Page
 
