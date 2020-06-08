@@ -167,8 +167,7 @@ router.delete('/delacc/:id', async (req,res)=>{
         res.redirect('/cars/1')
      }
     catch(err){
-        res.json(err)
-        console.log(err)
+        console.log(err);
     }
 })
 

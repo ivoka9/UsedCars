@@ -86,16 +86,21 @@ h2{
     text-align: center;
     background-color: white;
     margin: 10px;
-    cursor: pointer;
+    
    
+}
+.container1 a {
+    pointer: cursor;
 }
 .car .name {
     margin-top: 2px;
     font-weight: bold;
 }
+
 .car a:hover{
     text-decoration: none;
     color: black;
+   
 }
 /* ************** Search ************* */
 .sps{
@@ -206,7 +211,7 @@ h2{
     text-decoration: none;  
     margin-top: 10px;
     width: 60px;
-    margin-left: 70px;
+    margin-left: 75px;
     
 }
 .edit a{
