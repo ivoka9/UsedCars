@@ -5,7 +5,20 @@ socket.on('msg',addMsg)
 
 function addMsg(data){
     if(data.seller==$("#sellerName").val() && data.buyer==$("#buyerName").val()){
-        $("#chat").append(`<p class="${data.who}">${data.msg} </p>`)
+        if(data.who=="buyer"){
+            $("#chat").append(`<div class="buyer"  id="newbuyer"></div>`)
+            $("#newbuyer").append(`<p class="buyername">${data.buyer} : </br> ${data.msg}</p>`)
+            var chat = document.getElementById("chat");
+            chat.scrollTop = chat.scrollHeight;
+            
+        }
+        else{
+            $("#chat").append(`<div class="seller" id="newseller" > </div>`)
+            $("#newseller").append(` <p class="sellername">${data.seller} : </br> ${data.msg}</p>`)
+            var chat = document.getElementById("chat");
+            chat.scrollTop = chat.scrollHeight;
+            
+        }
     }
     
 }
@@ -15,6 +28,7 @@ $('#buyertext').keypress(function(event){
    {   
         let data = socketData (this.value,"buyer")
         socket.emit('msg',data)
+        console.log("here")
         $('#buyersubmit').click()
     }
 })
@@ -24,6 +38,8 @@ $('#sellertext').keypress( function(event){
     {
     let data =  socketData (this.value,"seller")
       socket.emit('msg',data)
+      console.log("here")
+
     $('#sellersubmit').click()
     }
 

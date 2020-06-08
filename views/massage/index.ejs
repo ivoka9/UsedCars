@@ -41,7 +41,8 @@
     <%if (story.length>1) {%>
         <%for(let i=1; i<story.length; i+=3){%>
             <div class="<%=story[i+2]%>" >
-                <p class="<%=story[i+2]%>name"><%=story[i+1]%> : </br> <%=story[i]%></p></div>
+                <p class="<%=story[i+2]%>name"><%=story[i+1]%> : </br> <%=story[i]%></p>
+            </div>
         <% } %>
             
     <%}%>
@@ -79,8 +80,7 @@
 </body>
 <script>
     // Stack Overflow
-   var chat = document.getElementById("chat");
-chat.scrollTop = chat.scrollHeight;
-
+    var chat = document.getElementById("chat");
+            chat.scrollTop = chat.scrollHeight;
 </script>
 </html>
