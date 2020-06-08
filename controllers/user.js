@@ -2,15 +2,16 @@ const express = require('express')
 const router = express.Router()
 const db = require('../models')
 const bcrypt= require('bcryptjs');
+const fs= require('fs')
 
 let userFlag=false , phoneFlag=false, loginFlag=false ,passwordFlag= false;
 
-// if  based on the session it will eather show him to log in or logout
+// based on the session it will either show him to log in or logout
 router.get('/' ,(req,res)=>{
     res.render('user/index' ,  { user: req.session } )
 })
 
-// Creating a use 
+// Creating a user 
 router.get('/create',  async (req,res)=>{
     
     res.render('user/newAcc' , {
@@ -59,26 +60,30 @@ router.post('/create', async (req,res)=>{
             
         }
         const newUser = await db.User.create(creatingUser)
-        res.redirect('/')
+        res.redirect('/cars/1')
     }
     catch(err){
         if(err){console.log(err)}
-        res.redirect('/')
+        res.redirect('/cars/1')
     }
 })
 
 
 router.get('/login', (req,res)=>{
+    const flag = false
     res.render('user/login',{loginFlag : loginFlag})
 })
 
 
 router.post('/login', async (req,res)=>{
     try{
+
         loginFlag= false
         const foundUser = await db.User.findOne({Username: req.body.username})
         if(!foundUser){
                     loginFlag=true;
+                    
+
             return res.redirect('/login')}
         const pass =await  bcrypt.compare(req.body.password , foundUser.Password)
         if(!pass){
@@ -88,7 +93,7 @@ router.post('/login', async (req,res)=>{
             id : foundUser._id ,
             username: foundUser.Username
         }
-        res.redirect('/')
+        res.redirect(`/profile/${foundUser._id}`);
     }
     catch(err){
         res.redirect('/login')
@@ -97,19 +102,47 @@ router.post('/login', async (req,res)=>{
 })
 
 
-router.post('/logout' , async (req,res)=>{
+router.get('/logout' , async (req,res)=>{
     await req.session.destroy();
-    res.redirect('/')
+    res.redirect('/cars/1')
 })
 
 router.get('/profile/:id' , async (req,res)=>{
 try{
-    
+    let chaturl=[]
+    let who=[]
 const userProfile = await db.User.findById(req.params.id)
+const chat = await db.Massage.find({story: userProfile.Username})
 const foundCars = await db.Car.find({user: req.params.id})
-const currentUser = req.session;
-console.log(currentUser);
-res.render("user/profile",{userProfile : userProfile, cars: foundCars,currentUser:currentUser}); 
+try{
+   
+  flag =(req.session.currentUser.username==userProfile.Username);
+  try{
+  for(let i=0 ; i<chat.length ; i++){
+      if(chat[i].story[2]==userProfile.Username){
+        const foundUser = await db.User.find({Username : chat[i].story[0]})
+        
+        chaturl.push(`/massage/${chat[i].story[2]}/${foundUser[0]._id}`)
+        who.push(chat[i].story[0]) 
+        who.push("Seller") 
+      }
+      if(chat[i].story[0]==userProfile.Username  ){
+   chaturl.push(`/massage/${chat[i].story[2]}/${userProfile._id}`)
+   who.push(chat[i].story[2]) 
+   who.push("Buyer") 
+
+      }
+  }
+    }catch{}  
+}
+catch{
+    flag = false
+}
+res.render("user/profile",{userProfile : userProfile, 
+                             cars: foundCars,
+                             flag:flag,user: req.session,
+                            chat :chaturl,
+                            who:who }); 
 }   
 
 catch(err){
@@ -117,6 +150,34 @@ catch(err){
     res.redirect('/profile')
 }
 });
+
+router.delete('/delacc/:id', async (req,res)=>{
+  await  req.session.destroy()
+  let deletedCar
+    try {
+        const delUser= await db.User.findByIdAndDelete(req.params.id)
+        const delCars= await db.Car.find({user : req.params.id})
+       
+        for(let i=0 ; i<delCars.length; i++){
+            deletedCar = await db.Car.findByIdAndDelete(delCars[i]._id)               
+            for(let i=0 ; i<deletedCar.img.length ;i++) {
+                fs.unlink(`./public/${deletedCar.img[i][0]}`,function(){})
+            }        
+            fs.rmdir(`./public/users/${deletedCar.user}/${deletedCar.secondid}`,function(){})
+                     
+        }
+        fs.rmdir(`./public/users/${deletedCar.secondid}`,function(){}) 
+        res.redirect('/cars/1')
+     }
+    catch(err){
+        res.json(err)
+        console.log(err)
+    }
+})
+
+router.get('/*', function(req,res){
+    res.render('user/error',{user: req.session});
+})
 
 
 module.exports= router

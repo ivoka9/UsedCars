@@ -1,59 +1,67 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../models');
-
+const fs = require('fs')
 const autorization = require('../middlewere/auth.js')
 const multer = require('multer')
 const path= require('path')
 
 let arr=[]
 
-// root routes /cars
 
-router.get('/',function(req,res){
-    db.Car.find({}, function(error, allCars){
-        if(error){
-            console.log(error);
-        } else {
-            const context = {cars: allCars};
-            
-            res.render('car/index', context);
-        }
-    });
-    
+  // root routes /cars
 
-});
+
 // new route //
 router.get('/new', async function(req,res,next){
    const userid = autorization(req.session.currentUser,res,next)
-    res.render('car/new' ,{userid: userid});
+    res.render('car/new' ,{userid: userid, user: req.session,err:false});
 })
 
  
 // create route
 router.post('/:id', function(req,res){
+    let stopFlag= false;
 let secondid = Number(Date.now())
     const storage = multer.diskStorage({
         destination: `./public/users/${req.params.id}/${secondid}`  ,
         filename: function(req,file,cb){
+            if(path.extname(file.originalname) == ".png"|| path.extname(file.originalname) == ".jpg"
+            || path.extname(file.originalname) == ".jpeg")
+            {}
+            else {
+                console.log("errorrr")
+                    return res.render("car/new",{userid: req.session.currentUser.id, user: req.session ,err:true});
+            }
+            
             cb(null, file.fieldname+'-'+Date.now()+path.extname(
                 file.originalname
             ));
         }
     })
+    
+
+    
     const upload = multer({
         storage:storage
     }).array('imgName' ,5)
-
+    
+   
+   
     upload(req, res, (err)=>{
-        if(err){console.log(err)}
+        if(err)
+        {
+            return res.render("car/new",{userid: req.session.currentUser.id, user: req.session ,err:true});
+
+        }
         else{
             arr=[]
          for(let i=0 ; i< req.files.length ; i++ ){
              const img =req.files[i].path.replace("public",'')
              arr.push(img)
          }
-
+        
+      
             const newCar = {
                 name : req.body.name ,
                 price : req.body.price ,
@@ -67,9 +75,9 @@ let secondid = Number(Date.now())
             db.Car.create(newCar, async function(error, createdCar){
                 if(error){
                     console.log(error);
-                } else {
-                  
-                    res.redirect('/cars');
+                } else {    
+                
+                    res.redirect(`/profile/${createdCar.user}`);
                 }
             });
         }
@@ -80,13 +88,13 @@ let secondid = Number(Date.now())
 });
 
 // show route
-router.get('/:id', function(req,res){
+router.get('/:id/new', function(req,res){
     db.Car.findById(req.params.id, function(error, foundCar){
         if(error){
             console.log(error);
         } else {
 
-            const context = {car: foundCar};
+            const context = {car: foundCar,user: req.session};
             res.render('car/show', context);
         }
     });
@@ -98,7 +106,7 @@ router.get('/:id/edit', function(req,res){
         if(error){
             console.log(error);
         } else {
-            const context = {car: foundCar};
+            const context = {car: foundCar, user: req.session};
             res.render('car/edit', context);
             
         }
@@ -120,14 +128,63 @@ router.put('/:id',function(req,res){
 router.delete('/:id',function(req,res){
 
      db.Car.findByIdAndDelete(req.params.id,function(error,deletedCar){
+        try{
          if(error){
              console.log(error);
-         } else {
-            res.redirect(`/profile/${deletedCar.user}`);
+             
+         } 
+        
+         else {
+           for(let i=0 ; i<deletedCar.img.length ;i++) {
+              
+                fs.unlink(`./public/${deletedCar.img[i][0]}`,function(){})
+           
+           }
+           fs.rmdir(`./public/users/${deletedCar.user}/${deletedCar.secondid}`,function(){
+           })
+           res.redirect(`/profile/${deletedCar.user}`);
+        }
+           
          }
+         catch(err){console.log(err)}
      });
     });
-       
+
+
+ 
+
+router.get('/:page',function(req,res){
+    if(req.query.search){
+        db.Car.find({name: req.query.search}, function(error,foundSearch){
+            if(error){
+                console.log(error);
+            } else {
+                    
+            const context = {cars: foundSearch, user: req.session, page:req.params.page,sort: false};
+            
+             return res.render('car/index', context);
+            }
+        })
+    }
+    else {
+        db.Car.find({}, function(error, allCars){
+            if(error){
+                console.log(error);
+            } else {
+              const sort =(require('../middlewere/sorth.js'))  
+              sort(allCars,req.query.sortby)          
+                const context = {cars: allCars, user: req.session, page:req.params.page, sort:req.query.sortby};
+              res.render('car/index', context);
+            }
+        });
+        
+
+    }
+   
+
+});
+    
+      
         
  
 module.exports = router;

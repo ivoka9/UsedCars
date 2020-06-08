@@ -1,0 +1,30 @@
+body{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+ 
+.new-form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(252, 78, 66, 0.932);
+    border-radius: 10px;
+    width: 600px;
+    height: 500px;
+    margin: 0 auto;
+    margin-top: 20px;
+     background-color: white;
+}
+
+ .new-form .imagelabel {
+    margin-left: 15px;
+}
+
+#addbutton {
+    border: 1px solid rgba(252, 78, 66, 0.932);
+    background-color: rgba(252, 78, 66, 0.932);
+    color: black;
+   
+}

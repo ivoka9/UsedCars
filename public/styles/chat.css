@@ -1,0 +1,111 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    background: linear-gradient(to bottom, #33ccff 0%, #ff99cc 100%); 
+}
+
+.chatrooms{
+    position: fixed;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    background-color: transparent;
+    bottom: 0;
+    left: 0;
+    
+}
+
+.buyerchat{
+    text-align: center;
+    height: 35vh;
+    width: 25vw;
+    background-color: transparent;
+   
+    
+}
+
+.sellerchat{
+   
+    height: 35vh;
+    width: 25vw;
+    flex-direction: row-reverse;
+    text-align: center;
+    background-color: transparent;
+   
+    
+}
+
+.chat{
+    margin: 0 auto ;
+    background-color:  #C4E1F2;
+    width: 50vw;
+    height: 92vh;
+    overflow: auto;
+    border-radius: 10px;
+}
+
+.buyer{
+    text-align: end;
+    margin: 10px 55% 10px 10px;
+    border-radius: 10px;
+    width: 40%;
+    background-color: #529EF0;
+}
+.seller{
+    border-radius: 10px;
+    width: 40%;
+    margin: 10px 10px 10px 57%;
+    text-align: start;
+    background-color: #56E364;
+}
+
+p{
+    padding: 10px ;
+    font-size: 18px;
+}
+p.buyername{
+    text-align: left;
+}
+h3{
+    text-align: center;
+}
+/* stack overflow*/
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; 
+}
+
+input{
+    font-size: 20px;
+    text-align: center;
+    background-color: transparent;
+    border-radius: 5px;
+}
+
+.buyerchat p,.sellerchat p{
+    padding: 0;
+}
+
+
+
+.buyerchat textarea,.sellerchat textarea{
+    resize: none;
+    border-radius: 5px;
+    font-size: 18px;
+    margin: 10px auto;
+    width: 95%;
+    height: 100px;
+}
+
+.buyerlabel,.sellerlabel{
+    font-size: 25px;
+}
+
+.hidden{
+    opacity:0;
+    pointer-events: none;
+
+}

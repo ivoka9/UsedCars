@@ -4,59 +4,323 @@ body{
     padding: 0;
     
   }
+
+  /* ************* Navigation *************** */
   header {
+    
       height: 50px;
-      background-color: #142850;
+      background-image: linear-gradient(to right, rgba(255,0,0,0), rgb(245, 49, 49));
   }
+  
 
 header img{
     margin-left: 2px;
-    width: 100px;
+    width: 150px;
     height: 50px;
     float: left;
     
 }
 .right-menu {
+    font-family: 'Noto Sans HK', sans-serif;
     float: right;
     margin-right: 40px;
     margin-top: 20px;
 }
 .right-menu a {
+    
     text-decoration: none;
-    color: white;
-    padding: 0 10px;
-    margin: 0 10px;
+    color: black;
+    padding: 0 5px;
+    margin: 0 5px;
 }
 .right-menu a:hover{
     background-color: white;
-    color: #EEA200;
-    padding: 20px 10px;
+    color:  rgba(252, 78, 66, 0.932);
+    padding: 5px 5px;
+    text-decoration: none;
+    border-radius: 5px;
     
+}
+.right-menu button{
+  position: absolute;
+  top: 19px;
+  right: 150px;
+  background-color: transparent;
+  color: black;
+  border-style: none; 
+  cursor: pointer;
+
+}
+.right-menu button:hover {
+    background-color: white;
+    color:  rgba(252, 78, 66, 0.932);
+    padding: 3px;
+    border-radius: 4px;
 }
 .advertise {
-    height: 0px;
-    background-color: #ffffff;
-    
+    height: 280px;
+    background-image: url('toyotanav.png');
+    background-size: cover;
 }
-.container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    height: calc( 100vh - 210px );
-    background-color: #00909E;
-}
-
 h2{
     text-align: center;
 }
-.footer{
-    background-color: #DAE1E7;
-    height: 60px;
+
+  /* ******************** Car Show Div ********************* */
+
+
+.container1 {
+   
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    height: 210px;
+  
+    
 }
 
-.car{
-   border: 1px solid red;
-    text-align: center;
-    background-color: yellow;
 
+
+.container1 .car{
+    border-radius: 10px;
+    padding: 1px;
+    border: 2px solid rgba(252, 78, 66, 0.932);
+    text-align: center;
+    background-color: white;
+    margin: 10px;
+    
+    cursor: pointer;
+   
+}
+.car .name {
+    margin-top: 2px;
+    font-weight: bold;
+}
+.car a:hover{
+    text-decoration: none;
+    color: black;
+}
+/* ************** Search ************* */
+.sps{
+    height: 40px;
+    display: flex;
+   flex-direction: row;
+   flex-wrap: nowrap;
+   justify-content: space-between;
+}
+
+.sps .search {
+    display: inline-block;
+    width: 100px;
+    
+    
+}
+.sps .search1 {
+    border-radius: 15px; 
+    padding: 5px;
+    margin-top: 5px;
+}
+ .sps i{
+   color: rgba(252, 78, 66, 0.932);
+   font-size: 30px;
+ }
+.sps .searchbtn {
+    background-color: transparent;
+    border-radius: 5px;
+    border: none;
+
+}
+.sps .searchbtn:hover {
+    cursor: pointer;
+    
+}
+/* *************** Sort ************** */
+
+.dropbtn {
+    border: 1px solid rgba(252, 78, 66, 0.932) ;
+    color: black;
+    padding: 5px;
+    font-size: 16px;
+    border-radius: 5px;
+    
+  }
+  
+  
+  .dropdown {
+    font-family: 'Noto Sans HK', sans-serif;
+    position: relative;
+    width: 100px;
+    margin-left: 10px;
+    margin-top: 5px;
+     
+  }
+  
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 140px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  
+  .dropdown-content a:hover {background-color: white; 
+    text-decoration: none;
+    color:  rgba(252, 78, 66, 0.932);
+}
+ 
+
+  .dropdown:hover .dropdown-content {display: block;}
+  
+  .dropdown:hover .dropbtn {background-color: rgba(252, 78, 66, 0.932)}
+
+  /* **************** Pagination ************** */
+
+ .sps .page{
+    
+    font-family: 'Noto Sans HK', sans-serif;
+    
+    width: 100px;
+    margin-right: 10px;
+    margin-top: 5px;
+  }
+
+ .sps .page a{
+    border: 1px solid rgba(252, 78, 66, 0.932);
+    border-radius: 5px;
+  }
+
+.page a:hover{
+    color:  rgba(252, 78, 66, 0.932);
+    
+}
+
+/* *********** Profile page Add Edit and Delete Buttons ********* */
+
+.edit{
+    margin-top: 5px;
+
+    border: 1px solid rgba(252, 78, 66, 0.932) ;
+    padding: 1px;
+    border-radius: 5px;
+    background-color: white;
+    color: black;
+    text-decoration: none;  
+    margin-top: 10px;
+    width: 60px;
+    margin-left: 70px;
+    
+}
+.edit a{
+    color: black;
+}
+.edit a:hover{
+    background-color: white;
+    color: rgba(252, 78, 66, 0.932);
+}
+
+.delete {
+    border: 1px solid rgba(252, 78, 66, 0.932);
+    background-color: white;
+    border-radius: 5px;
+   
+}
+.delete:hover{
+    background-color: white;
+    color: rgba(252, 78, 66, 0.932);
+}
+#add{
+    border: 1px solid rgba(252, 78, 66, 0.932);
+    padding: 4px;
+    border-radius: 5px;
+    background-color: white;
+    color: black;
+    text-decoration: none;
+}
+#add:hover{
+    background-color: white;
+    color: rgba(252, 78, 66, 0.932);
+}
+.addcar{
+    margin-top: 20px;
+    margin-left: 60px;
+   
+}
+.addcar a{
+    border: 1px solid rgba(252, 78, 66, 0.932);
+    padding: 5px;
+    border-radius: 20px;
+    color: black;
+    background-color: rgba(252, 78, 66, 0.932);
+    
+}
+.addcar a:hover {
+    text-decoration: none;
+    color: black;
+    
+}
+/* ************ Show Page ************** */
+
+.show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.show .list{
+    list-style-type: none;
+    display: inline-block;
+    font-size: 25px;
+}
+.show .msg{
+    border: 1px solid rgba(252, 78, 66, 0.932);
+    padding: 5px;
+    border-radius: 20px;
+    color: black;
+    background-color: rgba(252, 78, 66, 0.932);
+    text-decoration: none;
+    
+}
+.show .msg:hover {
+    text-decoration: none;
+    color: black;
+    
+}
+
+.thumbnail {
+   
+   width: 650px;
+   height: 500px;
+   margin-left: 5px;
+   margin-top: 20px;
+   padding: 0;
+   display: flex;
+   flex-wrap: wrap;
+
+}
+.smallthumb{
+ 
+    width: 100%;
+    margin: 0;
+    height: 23%;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+.chatwith{
+    margin-left: 10px;
+    margin-right: 10px;
 }

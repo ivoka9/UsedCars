@@ -5,44 +5,111 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="/styles/main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+HK:wght@500&display=swap" rel="stylesheet">
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  
+  
 
   <title>Home Page</title>
 </head>
-<body>
-    <header>
- <nav>
-     <a href="/cars">
-    <img src="/images/carlogo.png" alt="car logo" class="image">
-  </a>
-    <div class="right-menu">
-        <a href="/login">Login</a>
-        <a href="/create">Register</a>
+<%  page= Number(page);  %>
 
-    </div>
- </nav>
- </header>
+<body>
+  <header>
+    <nav>
+        <a href="/cars/1">
+       <img src="/images/logo2.png" alt="car logo" class="image"> 
+     </a>
+       <div class="right-menu">
+        <% if (user.currentUser) { %>
+          <a href="/profile/<%=user.currentUser.id%>" class="profile">Profile</a>
+         
+        <a href="/logout">Logout</a> 
+         </form>
+         
+      </nav>
+    </header>
+         
+        <% }  else { %>
+          
+               
+                   <a href="/login">Login</a>
+                   <a href="/create">Register</a>
+                   
+        </div> 
+            </nav>
+            </header>
+        <% }%>
+         
  <section class="advertise">
 
  </section>
- <h2>List of Cars</h2>
- <div class = "container">
+ <div class="sps">
+ 
 
-    <% cars.forEach(car => { %>
-    <div class="car">
-      <img src="<%=car.img[0]%>"  height="150px" width="150px" alt="" srcset="">
-      <%= car.secondid.lenght %>
-      <div class="name">
-      <a href="/cars/<%= car._id %>"><%= car.name %> </a>
-      </div>  
-      <div class='text'>
-      Price: <%= car.price %>
-      </div>  
-    </div>
-      <% }) %>
-
+<div class="dropdown">
+  <button class="dropbtn" >Sort by</button>
+  <div class="dropdown-content">
+    <a href="/cars/<%=page%>?sortby=price">Price</a>
+    <a href="/cars/<%=page%>?sortby=mil">Mileage</a>
+    <a href="/cars/<%=page%>?sortby=year">Year</a>
+  </div>
 </div>
-<footer class = "footer">
+<div id="search">
+  <form action="/cars/1" method="get" id="search" >
+   <input type="text" placeholder="search" name="search" class="search1">
+  <button class="searchbtn">
+   <label for="search" class="icon"> <i class="fa fa-search"></i></label>
+ </button>
+   </form>
+ </div>
+<div class="page">
+  <nav aria-label="Page navigation example">
+    <ul class="pagination" name='ul'>
+      <li class="page-item " name='page'> 
+      
+          <a class="page-link"  
+          <%if(page-1!=0){%>
+          href="/cars/<%=page-1%>"  
+          <%} %>
+          ><</a>    
+      </li>
+     
+      <li class="page-item " name='page'> 
+          <a class="page-link" 
+          <%if(page<(cars.length/5)){%>
+           <% if(sort){ %>
+             href="/cars/<%=page+1%>?sortby=<%=sort%>" 
+           <%}%>
+            href="/cars/<%=page+1%>"  
+            <%} %>
+          >></a>    
+             
+      </li>
+    </ul>
+  </nav>
+</div>
+</div>
+ <div class = "container1">
+  
+  
+   <% for( let i =0+((5*page)-5) ; i < cars.length && i < 5*(page) ; i++) { %>
+    <div class="car">
+      <div class="name">
+       <%= cars[i].name %> 
+        </div>  
+        <div class='text'>
+         
+        $<%= cars[i].price %>
+        </div>  
+        <a href="/cars/<%= cars[i]._id %>/new"><img src="<%=cars[i].img[0]%>"  height="115px" width="200px" alt="" srcset="">
+      <%= cars[i].secondid.length %></a>
+      
+    </div>
+      <% } %>
+      
+</div>
 
-</footer>
 </body>
 </html>
