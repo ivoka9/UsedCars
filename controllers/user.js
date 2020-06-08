@@ -60,7 +60,7 @@ router.post('/create', async (req,res)=>{
             
         }
         const newUser = await db.User.create(creatingUser)
-        res.redirect('/cars/1')
+        res.redirect('/login')
     }
     catch(err){
         if(err){console.log(err)}
@@ -170,8 +170,7 @@ router.delete('/delacc/:id', async (req,res)=>{
         res.redirect('/cars/1')
      }
     catch(err){
-        res.json(err)
-        console.log(err)
+        console.log(err);
     }
 })
 
