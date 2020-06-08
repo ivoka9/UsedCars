@@ -28,7 +28,7 @@ $('#buyertext').keypress(function(event){
    {   
         let data = socketData (this.value,"buyer")
         socket.emit('msg',data)
-        console.log("here")
+        console.log(event.keyCode)
         $('#buyersubmit').click()
     }
 })
@@ -38,7 +38,7 @@ $('#sellertext').keypress( function(event){
     {
     let data =  socketData (this.value,"seller")
       socket.emit('msg',data)
-      console.log("here")
+      console.log(event.keyCode)
 
     $('#sellersubmit').click()
     }
