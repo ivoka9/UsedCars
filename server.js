@@ -6,12 +6,12 @@ const session= require('express-session')
 const store = require('connect-mongo')(session)
 const controllers =require('./controllers')
 const socket = require("socket.io")
-
+require('dotenv').config()
 
 
 const app = express();
 
-const PORT = 4000;
+const PORT = process.env.PORT;
 
 app.set('view engine','ejs');
 app.use(express.static(__dirname+"/public"))
@@ -19,9 +19,9 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(methodOverride('_method'));
 app.use(session({
     store: new store({        
-    url: "mongodb://localhost:27017/usedcars",      
+    url: process.env.MONGODB_URI,     
     }),
-    secret:"ivo",
+    secret: process.env.SECRET_KEY,
     resave:false,
     saveUninitialized: false,
     cookie:{ maxAge: 1000*60*60*24*7},
@@ -44,4 +44,5 @@ io.sockets.on("connection" , function(socket){
         socket.broadcast.emit('msg',data)
     }
     console.log("socket connected")
+    console.log(process.env.SOCKETCONN)
 })

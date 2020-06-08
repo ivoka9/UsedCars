@@ -1,5 +1,6 @@
+
 let socket
-socket= io.connect('http://localhost:4000')
+socket= io.connect("http://localhost:4000") 
 socket.on('msg',addMsg)
 
 
