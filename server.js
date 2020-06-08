@@ -5,6 +5,7 @@ const db = require('./models');
 const session= require('express-session')
 const store = require('connect-mongo')(session)
 const controllers =require('./controllers')
+const socket = require("socket.io")
 
 
 
@@ -30,6 +31,17 @@ app.use('/cars',controllers.car);
 app.use('/',controllers.user)
 
 
-app.listen(PORT, function(){
+const server = app.listen(PORT, function(){
     console.log(`Server is running on: ${PORT}`);
 });
+
+const io = socket(server)
+
+io.sockets.on("connection" , function(socket){
+    socket.on('msg' , sendingData)
+
+    function sendingData(data){
+        socket.broadcast.emit('msg',data)
+    }
+    console.log("socket connected")
+})

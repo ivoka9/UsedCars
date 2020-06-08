@@ -46,7 +46,7 @@
             <div class="form-group row">
                 <label for="Price" class="col-sm-2 col-form-label">Price</label>
                 <div class="col-sm-10">
-             <input type="number" name="price" value="<%= car.price %>" class="form-control" id="Price" />
+             <input type="number" name="price" min="0" value="<%= car.price %>" class="form-control" id="Price" />
                 </div>
             </div>
             <div class="form-group row">
@@ -58,7 +58,7 @@
             <div class="form-group row">
                 <label for="Mileage" class="col-sm-2 col-form-label">Miles</label>
                 <div class="col-sm-10">
-                <input type="number" name="mileage" value="<%= car.mileage %>" class="form-control" id="Mileage" />
+                <input type="number" name="mileage" min="0" value="<%= car.mileage %>" class="form-control" id="Mileage" />
                 </div>
             </div>
             <div class="form-group row">
