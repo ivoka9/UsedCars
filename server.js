@@ -42,7 +42,6 @@ io.sockets.on("connection" , function(socket){
 
     function sendingData(data){
         socket.broadcast.emit('msg',data)
-        console.log(data)
     }
     console.log("socket connected")
 })
