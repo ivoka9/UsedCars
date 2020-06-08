@@ -95,7 +95,6 @@
   
   
    <% for( let i =0+((4*page)-4) ; i < cars.length && i < 4*(page) ; i++) { %>
-    
     <div class="car">
       <a href="/cars/<%= cars[i]._id %>/new"><img src="<%=cars[i].img[0]%>"  height="175px" width="215px" alt="" srcset="">
         <%= cars[i].secondid.length %></a>
@@ -105,7 +104,7 @@
         <div class='text'>
          $<%= cars[i].price %>
         </div>  
-      
+    
       
     </div>
       <% } %>

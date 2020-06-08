@@ -22,7 +22,7 @@ router.get('/new', async function(req,res,next){
 
  
 // create route
-router.post('/:id', function(req,res){
+router.post('/:id', function(req,res,next){
     let stopFlag= false;
 let secondid = Number(Date.now())
     const storage = multer.diskStorage({
@@ -33,7 +33,7 @@ let secondid = Number(Date.now())
             {}
             else {
                 console.log("errorrr")
-                    return res.render("car/new",{userid: req.session.currentUser.id, user: req.session ,err:true});
+                return res.render("car/new",{userid: req.session.currentUser.id, user: req.session ,err:true});
             }
             
             cb(null, file.fieldname+'-'+Date.now()+path.extname(

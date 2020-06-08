@@ -1,11 +1,11 @@
 # Usedcars-project1
 
-**Scope**
+## Scope
 
 The objective is to build an app where users can buy or sell their cars with other users. Users
 will be able to see their cars, other user’s cars or search and sort the whole database for cars.
 
-**User Stories**
+## User Stories
 
 Non-Authenticated Users can:
 
@@ -25,27 +25,30 @@ Authenticated User can:
 * Edit posts for car they sell
 * Delete posts for car they sell
 * Chat with other user/buyer
+* Delete Account
 
-**Wireframes**
+## Wireframes
 
-## Home Page
+ **Home Page**
 
 Users will see logo Login/Register Link and car images with name and price.
 
+<img src="Images/landing.png" width="700" height="500">
 
-## Car Details Page
+**Car Details Page**
 
 Users will see details of car with images and will contact the seller after Register.
 
+<img src="Images/cardetails.png" width="700" height="500">
 
-## Profile Page
+**Profile Page**
 
 User will see listing of his cars and add/edit/delete cars. Also, he will see chat button
 to chat with buyer.
 
-**Data Models**
+<img src="Images/profile.png" width="700" height="500">
 
-## Users
+## Data Models
 
 * Username
 * Password
@@ -65,6 +68,8 @@ to chat with buyer.
 
 * SenderandReciever
 * Story
+
+
 
 
 
