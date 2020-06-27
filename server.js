@@ -19,9 +19,9 @@ app.use(methodOverride("_method"));
 app.use(
   session({
     store: new store({
-      url: process.env.MONGODB_URI,
+      url: process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/",
     }),
-    secret: process.env.SECRET_KEY,
+    secret: process.env.SECRET_KEY || "random",
     resave: false,
     saveUninitialized: false,
     cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 },
