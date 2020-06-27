@@ -50,13 +50,11 @@ to chat with buyer.
 
 ## Data Models
 
-**Users**
-
 * Username
 * Password
 * Phone
 
-**Cars**
+## Cars
 
 * Name
 * Price
@@ -66,8 +64,16 @@ to chat with buyer.
 * Image
 * [Userid]
 
-**Message**
+## Message
 
 * SenderandReciever
 * Story
+
+
+
+
+
+
+
+
 
